@@ -1,7 +1,7 @@
 package metropolis.hello.controller
 
-import metropolis.hello.data.HelloState
+import metropolis.hello.data.City
 
 class HelloController {
-    val state = HelloState("Metropolis")
+    val state = City("Metropolis")
 }
