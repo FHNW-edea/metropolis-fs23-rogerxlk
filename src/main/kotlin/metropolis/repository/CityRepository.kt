@@ -1,6 +1,6 @@
 package metropolis.repository
 
-import metropolis.hello.data.City
+import metropolis.cityexplorer.data.City
 import metropolis.xtractedEditor.data.DbColumnEditor
 import metropolis.xtractedEditor.repository.CrudRepository
 import metropolis.xtractedEditor.repository.asSql

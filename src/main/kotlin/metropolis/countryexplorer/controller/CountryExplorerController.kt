@@ -1,12 +1,10 @@
-package metropolis.hello.controller
+package metropolis.countryexplorer.controller
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import metropolis.hello.data.Country
-import metropolis.repository.CountryColumnEditor
+import metropolis.cityexplorer.data.Country
 import metropolis.repository.CountryColumnExplorer
 import metropolis.xtractedEditor.model.format
-
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
 import metropolis.xtractedExplorer.model.DoubleColumn
 import metropolis.xtractedExplorer.model.IntColumn
@@ -18,8 +16,15 @@ private const val ELLIPSES = "..."
 fun countryExplorerController(repository: LazyRepository<Country>) =
     LazyTableController(title       = "Countries of the World",
         repository  = repository,
-        defaultItem = Country( -999, ELLIPSES,ELLIPSES,ELLIPSES, ELLIPSES, null, 0.0, 0, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES,ELLIPSES,ELLIPSES,ELLIPSES,0,ELLIPSES,
-            ELLIPSES),
+        defaultItem = Country( -999, ELLIPSES,
+            ELLIPSES,
+            ELLIPSES, ELLIPSES, null, 0.0, 0, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES,
+            ELLIPSES,
+            ELLIPSES,
+            ELLIPSES,0,
+            ELLIPSES,
+            ELLIPSES
+        ),
         columns     = listOf(StringColumn(header        = "Name",
             width         = 250.dp,
             alignment     = Alignment.CenterStart,

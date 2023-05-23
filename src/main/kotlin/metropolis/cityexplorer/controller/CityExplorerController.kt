@@ -1,8 +1,8 @@
-package metropolis.hello.controller
+package metropolis.cityexplorer.controller
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import metropolis.hello.data.City
+import metropolis.cityexplorer.data.City
 import metropolis.repository.CityColumnExplorer
 import metropolis.xtractedEditor.model.format
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
@@ -11,7 +11,6 @@ import metropolis.xtractedExplorer.model.IntColumn
 import metropolis.xtractedExplorer.model.StringColumn
 import metropolis.xtractedExplorer.repository.LazyRepository
 import java.time.LocalDate
-import java.util.*
 
 private const val ELLIPSES = "..."
 

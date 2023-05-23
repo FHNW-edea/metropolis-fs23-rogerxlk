@@ -1,4 +1,4 @@
-package metropolis.hello.data
+package metropolis.cityexplorer.data
 
 import metropolis.xtractedEditor.repository.Identifiable
 import java.time.LocalDate
