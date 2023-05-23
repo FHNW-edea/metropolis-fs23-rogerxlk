@@ -1,6 +1,7 @@
 package metropolis.hello.data
 
-import metropolis.xtracted.repository.Identifiable
+import metropolis.xtractedEditor.repository.Identifiable
+
 
 data class Country(
     override val id: Int,

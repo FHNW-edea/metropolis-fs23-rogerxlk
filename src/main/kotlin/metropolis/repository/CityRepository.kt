@@ -1,12 +1,16 @@
 package metropolis.repository
 
 import metropolis.hello.data.City
-import metropolis.xtracted.data.DbColumn
-import metropolis.xtracted.repository.CrudRepository
-import metropolis.xtracted.repository.asSql
+import metropolis.xtractedEditor.data.DbColumnEditor
+import metropolis.xtractedEditor.repository.CrudRepository
+import metropolis.xtractedEditor.repository.asSql
+import metropolis.xtractedExplorer.data.DbColumnExplorer
+import metropolis.xtractedExplorer.repository.LazyRepository
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
-enum class CityColumn : DbColumn {
+enum class CityColumnEditor : DbColumnEditor {
     ID,
     NAME,
     ASCII_NAME,
@@ -28,51 +32,134 @@ enum class CityColumn : DbColumn {
     MODIFICATION_DATE
 }
 
-fun cityRepository(url: String) =
-    CrudRepository(url         = url,
-        table       = "CITY",
-        idColumn    = CityColumn.ID,
+fun cityCrudRepository(url: String) =
+    CrudRepository(url = url,
+        table = "CITY",
+        idColumn = CityColumnEditor.ID,
         dataColumns = mapOf(
-            CityColumn.NAME to { it.name.asSql() },
-            CityColumn.ASCII_NAME to { it.asciiName?.asSql() },
-            CityColumn.ALTERNATE_NAMES to { it.alternateNames?.asSql() },
-            CityColumn.LATITUDE to { it.latitude.toString() },
-            CityColumn.LONGITUDE to { it.longitude.toString() },
-            CityColumn.FEATURE_CLASS to { it.featureClass.asSql() },
-            CityColumn.FEATURE_CODE to { it.featureCode.asSql() },
-            CityColumn.COUNTRY_CODE to { it.countryCode.asSql() },
-            CityColumn.CC2 to { it.cc2?.asSql() },
-            CityColumn.ADMIN1_CODE to { it.admin1Code?.asSql() },
-            CityColumn.ADMIN2_CODE to { it.admin2Code?.asSql() },
-            CityColumn.ADMIN3_CODE to { it.admin3Code?.asSql() },
-            CityColumn.ADMIN4_CODE to { it.admin4Code?.asSql() },
-            CityColumn.POPULATION to { it.population.toString() },
-            CityColumn.ELEVATION to { it.elevation?.toString() },
-            CityColumn.DEM to { it.dem.toString() },
-            CityColumn.TIMEZONE to { it.timezone.asSql() },
-            CityColumn.MODIFICATION_DATE to { it.modificationDate.toString() }
+            CityColumnEditor.NAME to { it.name.asSql() },
+            CityColumnEditor.ASCII_NAME to { it.asciiName?.asSql() },
+            CityColumnEditor.ALTERNATE_NAMES to { it.alternateNames?.asSql() },
+            CityColumnEditor.LATITUDE to { it.latitude.toString() },
+            CityColumnEditor.LONGITUDE to { it.longitude.toString() },
+            CityColumnEditor.FEATURE_CLASS to { it.featureClass.asSql() },
+            CityColumnEditor.FEATURE_CODE to { it.featureCode.asSql() },
+            CityColumnEditor.COUNTRY_CODE to { it.countryCode.asSql() },
+            CityColumnEditor.CC2 to { it.cc2?.asSql() },
+            CityColumnEditor.ADMIN1_CODE to { it.admin1Code?.asSql() },
+            CityColumnEditor.ADMIN2_CODE to { it.admin2Code?.asSql() },
+            CityColumnEditor.ADMIN3_CODE to { it.admin3Code?.asSql() },
+            CityColumnEditor.ADMIN4_CODE to { it.admin4Code?.asSql() },
+            CityColumnEditor.POPULATION to { it.population.toString() },
+            CityColumnEditor.ELEVATION to { it.elevation?.toString() },
+            CityColumnEditor.DEM to { it.dem.toString() },
+            CityColumnEditor.TIMEZONE to { it.timezone.asSql() },
+            CityColumnEditor.MODIFICATION_DATE to { it.modificationDate.toString() }
         ),
 
-        mapper      = { City(id                = getInt   ("${CityColumn.ID}"),
-            name              = getString("${CityColumn.NAME}"),
-            asciiName         = getString("${CityColumn.ASCII_NAME}"),
-            alternateNames    = getString("${CityColumn.ALTERNATE_NAMES}"),
-            latitude          = getDouble("${CityColumn.LATITUDE}"),
-            longitude         = getDouble("${CityColumn.LONGITUDE}"),
-            featureClass      = getString("${CityColumn.FEATURE_CLASS}"),
-            featureCode       = getString("${CityColumn.FEATURE_CODE}"),
-            countryCode       = getString("${CityColumn.COUNTRY_CODE}"),
-            cc2               = getString("${CityColumn.CC2}"),
-            admin1Code        = getString("${CityColumn.ADMIN1_CODE}"),
-            admin2Code        = getString("${CityColumn.ADMIN2_CODE}"),
-            admin3Code        = getString("${CityColumn.ADMIN3_CODE}"),
-            admin4Code        = getString("${CityColumn.ADMIN4_CODE}"),
-            population        = getInt   ("${CityColumn.POPULATION}"),
-            elevation         = getInt   ("${CityColumn.ELEVATION}"),
-            dem               = getInt   ("${CityColumn.DEM}"),
-            timezone          = getString("${CityColumn.TIMEZONE}"),
-            modificationDate  = getDate  ("${CityColumn.MODIFICATION_DATE}")
-        ) }
+        mapper = {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val modificationDate: LocalDate =
+                LocalDate.parse(getString("${CityColumnEditor.MODIFICATION_DATE}"), formatter)
+            City(
+                id = getInt("${CityColumnEditor.ID}"),
+                name = getString("${CityColumnEditor.NAME}"),
+                asciiName = getString("${CityColumnEditor.ASCII_NAME}"),
+                alternateNames = getString("${CityColumnEditor.ALTERNATE_NAMES}"),
+                latitude = getDouble("${CityColumnEditor.LATITUDE}"),
+                longitude = getDouble("${CityColumnEditor.LONGITUDE}"),
+                featureClass = getString("${CityColumnEditor.FEATURE_CLASS}"),
+                featureCode = getString("${CityColumnEditor.FEATURE_CODE}"),
+                countryCode = getString("${CityColumnEditor.COUNTRY_CODE}"),
+                cc2 = getString("${CityColumnEditor.CC2}"),
+                admin1Code = getString("${CityColumnEditor.ADMIN1_CODE}"),
+                admin2Code = getString("${CityColumnEditor.ADMIN2_CODE}"),
+                admin3Code = getString("${CityColumnEditor.ADMIN3_CODE}"),
+                admin4Code = getString("${CityColumnEditor.ADMIN4_CODE}"),
+                population = getInt("${CityColumnEditor.POPULATION}"),
+                elevation = getInt("${CityColumnEditor.ELEVATION}"),
+                dem = getInt("${CityColumnEditor.DEM}"),
+                timezone = getString("${CityColumnEditor.TIMEZONE}"),
+                modificationDate = modificationDate
+            )
+        }
+    )
+
+
+enum class CityColumnExplorer : DbColumnExplorer {
+    ID,
+    NAME,
+    ASCII_NAME,
+    ALTERNATE_NAMES,
+    LATITUDE,
+    LONGITUDE,
+    FEATURE_CLASS,
+    FEATURE_CODE,
+    COUNTRY_CODE,
+    CC2,
+    ADMIN1_CODE,
+    ADMIN2_CODE,
+    ADMIN3_CODE,
+    ADMIN4_CODE,
+    POPULATION,
+    ELEVATION,
+    DEM,
+    TIMEZONE,
+    MODIFICATION_DATE
+}
+
+fun cityLazyRepository(url: String) =
+    LazyRepository(
+        url = url,
+        table = "CITY",
+        dataColumns = listOf(
+            CityColumnExplorer.ID,
+            CityColumnExplorer.NAME,
+            CityColumnExplorer.ASCII_NAME,
+            CityColumnExplorer.ALTERNATE_NAMES,
+            CityColumnExplorer.LATITUDE,
+            CityColumnExplorer.LONGITUDE,
+            CityColumnExplorer.FEATURE_CLASS,
+            CityColumnExplorer.FEATURE_CODE,
+            CityColumnExplorer.COUNTRY_CODE,
+            CityColumnExplorer.CC2,
+            CityColumnExplorer.ADMIN1_CODE,
+            CityColumnExplorer.ADMIN2_CODE,
+            CityColumnExplorer.ADMIN3_CODE,
+            CityColumnExplorer.ADMIN4_CODE,
+            CityColumnExplorer.POPULATION,
+            CityColumnExplorer.ELEVATION,
+            CityColumnExplorer.DEM,
+            CityColumnExplorer.TIMEZONE,
+            CityColumnExplorer.MODIFICATION_DATE
+        ),
+        idColumn = CityColumnExplorer.ID,
+        mapper = {
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+            val modificationDate: LocalDate =
+                LocalDate.parse(getString(CityColumnEditor.MODIFICATION_DATE.name), formatter)
+            City(
+                id = getInt(CityColumnEditor.ID.name),
+                name = getString(CityColumnEditor.NAME.name),
+                asciiName = getString(CityColumnEditor.ASCII_NAME.name),
+                alternateNames = getString(CityColumnEditor.ALTERNATE_NAMES.name),
+                latitude = getDouble(CityColumnEditor.LATITUDE.name),
+                longitude = getDouble(CityColumnEditor.LONGITUDE.name),
+                featureClass = getString(CityColumnEditor.FEATURE_CLASS.name),
+                featureCode = getString(CityColumnEditor.FEATURE_CODE.name),
+                countryCode = getString(CityColumnEditor.COUNTRY_CODE.name),
+                cc2 = getString(CityColumnEditor.CC2.name),
+                admin1Code = getString(CityColumnEditor.ADMIN1_CODE.name),
+                admin2Code = getString(CityColumnEditor.ADMIN2_CODE.name),
+                admin3Code = getString(CityColumnEditor.ADMIN3_CODE.name),
+                admin4Code = getString(CityColumnEditor.ADMIN4_CODE.name),
+                population = getInt(CityColumnEditor.POPULATION.name),
+                elevation = getInt(CityColumnEditor.ELEVATION.name),
+                dem = getInt(CityColumnEditor.DEM.name),
+                timezone = getString(CityColumnEditor.TIMEZONE.name),
+                modificationDate = modificationDate
+            )
+        }
     )
 
 

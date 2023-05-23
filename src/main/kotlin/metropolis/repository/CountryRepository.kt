@@ -1,11 +1,14 @@
 package metropolis.repository
 
 import metropolis.hello.data.Country
-import metropolis.xtracted.data.DbColumn
-import metropolis.xtracted.repository.CrudRepository
-import metropolis.xtracted.repository.asSql
+import metropolis.xtractedEditor.data.DbColumnEditor
+import metropolis.xtractedEditor.repository.CrudRepository
+import metropolis.xtractedEditor.repository.asSql
+import metropolis.xtractedExplorer.data.DbColumnExplorer
+import metropolis.xtractedExplorer.repository.LazyRepository
 
-enum class CountryColumn : DbColumn {
+
+enum class CountryColumnEditor : DbColumnEditor {
     ISO_ALPHA2,
     ISO_ALPHA3,
     ISO_NUMERIC,
@@ -27,52 +30,126 @@ enum class CountryColumn : DbColumn {
     EQUIVALENT_FIPS_CODE
 }
 
-fun countryRepository(url: String) =
+fun countryCrudRepository(url: String) =
     CrudRepository(url         = url,
         table       = "COUNTRY",
-        idColumn    = CountryColumn.ISO_NUMERIC,
+        idColumn    = CountryColumnEditor.ISO_NUMERIC,
         dataColumns = mapOf(
-            CountryColumn.ISO_ALPHA2 to { it.isoAlpha2.asSql() },
-            CountryColumn.ISO_ALPHA3 to { it.isoAlpha3.asSql() },
-            CountryColumn.FIPS_CODE to { it.fipsCode?.asSql() },
-            CountryColumn.NAME to { it.name.asSql() },
-            CountryColumn.CAPITAL to { it.capital?.asSql() },
-            CountryColumn.AREA_IN_SQKM to { it.areaInSqKm.toString() },
-            CountryColumn.POPULATION to { it.population.toString() },
-            CountryColumn.CONTINENT to { it.continent.asSql() },
-            CountryColumn.TLD to { it.tld?.asSql() },
-            CountryColumn.CURRENCY_CODE to { it.currencyCode?.asSql() },
-            CountryColumn.CURRENCY_NAME to { it.currencyName?.asSql() },
-            CountryColumn.PHONE to { it.phone?.asSql() },
-            CountryColumn.POSTAL_CODE_FORMAT to { it.postalCodeFormat?.asSql() },
-            CountryColumn.POSTAL_CODE_REGEX to { it.postalCodeRegex?.asSql() },
-            CountryColumn.LANGUAGES to { it.languages?.asSql() },
-            CountryColumn.GEONAME_ID to { it.geonameId.toString() },
-            CountryColumn.NEIGHBOURS to { it.neighbours?.asSql() },
-            CountryColumn.EQUIVALENT_FIPS_CODE to { it.equivalentFipsCode?.asSql() }
+            CountryColumnEditor.ISO_ALPHA2 to { it.isoAlpha2.asSql() },
+            CountryColumnEditor.ISO_ALPHA3 to { it.isoAlpha3.asSql() },
+            CountryColumnEditor.FIPS_CODE to { it.fipsCode?.asSql() },
+            CountryColumnEditor.NAME to { it.name.asSql() },
+            CountryColumnEditor.CAPITAL to { it.capital?.asSql() },
+            CountryColumnEditor.AREA_IN_SQKM to { it.areaInSqKm.toString() },
+            CountryColumnEditor.POPULATION to { it.population.toString() },
+            CountryColumnEditor.CONTINENT to { it.continent.asSql() },
+            CountryColumnEditor.TLD to { it.tld?.asSql() },
+            CountryColumnEditor.CURRENCY_CODE to { it.currencyCode?.asSql() },
+            CountryColumnEditor.CURRENCY_NAME to { it.currencyName?.asSql() },
+            CountryColumnEditor.PHONE to { it.phone?.asSql() },
+            CountryColumnEditor.POSTAL_CODE_FORMAT to { it.postalCodeFormat?.asSql() },
+            CountryColumnEditor.POSTAL_CODE_REGEX to { it.postalCodeRegex?.asSql() },
+            CountryColumnEditor.LANGUAGES to { it.languages?.asSql() },
+            CountryColumnEditor.GEONAME_ID to { it.geonameId.toString() },
+            CountryColumnEditor.NEIGHBOURS to { it.neighbours?.asSql() },
+            CountryColumnEditor.EQUIVALENT_FIPS_CODE to { it.equivalentFipsCode?.asSql() }
         ),
 
-        mapper      = { Country(isoAlpha2           = getString("${CountryColumn.ISO_ALPHA2}"),
-            isoAlpha3           = getString("${CountryColumn.ISO_ALPHA3}"),
-            id                  = getInt   ("${CountryColumn.ISO_NUMERIC}"),
-            fipsCode            = getString("${CountryColumn.FIPS_CODE}"),
-            name                = getString("${CountryColumn.NAME}"),
-            capital             = getString("${CountryColumn.CAPITAL}"),
-            areaInSqKm          = getDouble("${CountryColumn.AREA_IN_SQKM}"),
-            population          = getInt   ("${CountryColumn.POPULATION}"),
-            continent           = getString("${CountryColumn.CONTINENT}"),
-            tld                 = getString("${CountryColumn.TLD}"),
-            currencyCode        = getString("${CountryColumn.CURRENCY_CODE}"),
-            currencyName        = getString("${CountryColumn.CURRENCY_NAME}"),
-            phone               = getString("${CountryColumn.PHONE}"),
-            postalCodeFormat    = getString("${CountryColumn.POSTAL_CODE_FORMAT}"),
-            postalCodeRegex     = getString("${CountryColumn.POSTAL_CODE_REGEX}"),
-            languages           = getString("${CountryColumn.LANGUAGES}"),
-            geonameId           = getLong  ("${CountryColumn.GEONAME_ID}"),
-            neighbours          = getString("${CountryColumn.NEIGHBOURS}"),
-            equivalentFipsCode  = getString("${CountryColumn.EQUIVALENT_FIPS_CODE}")
+        mapper      = { Country(isoAlpha2           = getString("${CountryColumnEditor.ISO_ALPHA2}"),
+            isoAlpha3           = getString("${CountryColumnEditor.ISO_ALPHA3}"),
+            id                  = getInt   ("${CountryColumnEditor.ISO_NUMERIC}"),
+            fipsCode            = getString("${CountryColumnEditor.FIPS_CODE}"),
+            name                = getString("${CountryColumnEditor.NAME}"),
+            capital             = getString("${CountryColumnEditor.CAPITAL}"),
+            areaInSqKm          = getDouble("${CountryColumnEditor.AREA_IN_SQKM}"),
+            population          = getInt   ("${CountryColumnEditor.POPULATION}"),
+            continent           = getString("${CountryColumnEditor.CONTINENT}"),
+            tld                 = getString("${CountryColumnEditor.TLD}"),
+            currencyCode        = getString("${CountryColumnEditor.CURRENCY_CODE}"),
+            currencyName        = getString("${CountryColumnEditor.CURRENCY_NAME}"),
+            phone               = getString("${CountryColumnEditor.PHONE}"),
+            postalCodeFormat    = getString("${CountryColumnEditor.POSTAL_CODE_FORMAT}"),
+            postalCodeRegex     = getString("${CountryColumnEditor.POSTAL_CODE_REGEX}"),
+            languages           = getString("${CountryColumnEditor.LANGUAGES}"),
+            geonameId           = getLong  ("${CountryColumnEditor.GEONAME_ID}"),
+            neighbours          = getString("${CountryColumnEditor.NEIGHBOURS}"),
+            equivalentFipsCode  = getString("${CountryColumnEditor.EQUIVALENT_FIPS_CODE}")
         ) }
     )
+
+enum class CountryColumnExplorer : DbColumnExplorer {
+    ISO_ALPHA2,
+    ISO_ALPHA3,
+    ISO_NUMERIC,
+    FIPS_CODE,
+    NAME,
+    CAPITAL,
+    AREA_IN_SQKM,
+    POPULATION,
+    CONTINENT,
+    TLD,
+    CURRENCY_CODE,
+    CURRENCY_NAME,
+    PHONE,
+    POSTAL_CODE_FORMAT,
+    POSTAL_CODE_REGEX,
+    LANGUAGES,
+    GEONAME_ID,
+    NEIGHBOURS,
+    EQUIVALENT_FIPS_CODE
+}
+
+fun countryLazyRepository(url: String) =
+    LazyRepository(
+        url = url,
+        table = "COUNTRY",
+        dataColumns = listOf(
+            CountryColumnExplorer.ISO_ALPHA2,
+            CountryColumnExplorer.ISO_ALPHA3,
+            CountryColumnExplorer.ISO_NUMERIC,
+            CountryColumnExplorer.FIPS_CODE,
+            CountryColumnExplorer.NAME,
+            CountryColumnExplorer.CAPITAL,
+            CountryColumnExplorer.AREA_IN_SQKM,
+            CountryColumnExplorer.POPULATION,
+            CountryColumnExplorer.CONTINENT,
+            CountryColumnExplorer.TLD,
+            CountryColumnExplorer.CURRENCY_CODE,
+            CountryColumnExplorer.CURRENCY_NAME,
+            CountryColumnExplorer.PHONE,
+            CountryColumnExplorer.POSTAL_CODE_FORMAT,
+            CountryColumnExplorer.POSTAL_CODE_REGEX,
+            CountryColumnExplorer.LANGUAGES,
+            CountryColumnExplorer.GEONAME_ID,
+            CountryColumnExplorer.NEIGHBOURS,
+            CountryColumnExplorer.EQUIVALENT_FIPS_CODE
+        ),
+        idColumn = CountryColumnExplorer.ISO_NUMERIC,
+        mapper = {
+            Country(
+                isoAlpha2 = getString(CountryColumnExplorer.ISO_ALPHA2.name),
+                isoAlpha3 = getString(CountryColumnExplorer.ISO_ALPHA3.name),
+                id = getInt(CountryColumnExplorer.ISO_NUMERIC.name),
+                fipsCode = getString(CountryColumnExplorer.FIPS_CODE.name),
+                name = getString(CountryColumnExplorer.NAME.name),
+                capital = getString(CountryColumnExplorer.CAPITAL.name),
+                areaInSqKm = getDouble(CountryColumnExplorer.AREA_IN_SQKM.name),
+                population = getInt(CountryColumnExplorer.POPULATION.name),
+                continent = getString(CountryColumnExplorer.CONTINENT.name),
+                tld = getString(CountryColumnExplorer.TLD.name),
+                currencyCode = getString(CountryColumnExplorer.CURRENCY_CODE.name),
+                currencyName = getString(CountryColumnExplorer.CURRENCY_NAME.name),
+                phone = getString(CountryColumnExplorer.PHONE.name),
+                postalCodeFormat = getString(CountryColumnExplorer.POSTAL_CODE_FORMAT.name),
+                postalCodeRegex = getString(CountryColumnExplorer.POSTAL_CODE_REGEX.name),
+                languages = getString(CountryColumnExplorer.LANGUAGES.name),
+                geonameId = getLong(CountryColumnExplorer.GEONAME_ID.name),
+                neighbours = getString(CountryColumnExplorer.NEIGHBOURS.name),
+                equivalentFipsCode = getString(CountryColumnExplorer.EQUIVALENT_FIPS_CODE.name)
+            )
+        }
+    )
+
 
 /*
 CREATE TABLE COUNTRY (

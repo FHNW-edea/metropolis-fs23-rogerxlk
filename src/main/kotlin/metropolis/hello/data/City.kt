@@ -1,7 +1,7 @@
 package metropolis.hello.data
 
-import metropolis.xtracted.repository.Identifiable
-import java.sql.Date
+import metropolis.xtractedEditor.repository.Identifiable
+import java.time.LocalDate
 
 data class City(
     override val id: Int,
@@ -22,5 +22,5 @@ data class City(
     val elevation: Int? = null,
     val dem: Int,
     val timezone: String,
-    val modificationDate: Date
+    val modificationDate: LocalDate
 ) : Identifiable
