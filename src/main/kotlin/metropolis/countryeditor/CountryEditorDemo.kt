@@ -3,6 +3,7 @@ package metropolis.countryeditor
 import androidx.compose.ui.window.application
 import metropolis.xtractedEditor.repository.urlFromResources
 import metropolis.countryeditor.controller.countryEditor
+import metropolis.countryeditor.view.CountryEditorWindow
 import metropolis.repository.countryCrudRepository
 
 fun main() {
@@ -13,7 +14,7 @@ fun main() {
     val controller = countryEditor(countryId, repository)
 
     application {
-        metropolis.countryeditor.view.CountryEditorUi(state = controller.state,
+        CountryEditorWindow(state = controller.state,
             undoState = controller.undoState,
             trigger = { controller.triggerAction(it) })
     }

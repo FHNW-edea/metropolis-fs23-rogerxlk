@@ -37,10 +37,10 @@ fun countryEditor(id: Int, repository: CrudRepository<Country>): EditorControlle
                 equivalentFipsCode = attributes[Id.EQUIVALENT_FIPS_CODE]
             )
         },
-        asAttributeList = { city ->
+        asAttributeList = { country ->
             listOf(
                 (stringAttribute(id = Id.NAME,
-                    value = city.name,
+                    value = country.name,
                     required = true,
                     syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
             )
@@ -71,7 +71,7 @@ enum class Id(override val german: String, override val english: String) : Attri
 }
 
 private enum class Message(override val german: String, override val english: String) : Translatable {
-    TITLE("Stadt Editor", "City Editor"),
+    TITLE("Land Editor", "Country Editor"),
     TOO_HIGH("zu hoch", "too high"),
     TOO_LOW("zu niedrig", "too low"),
     NAME_TOO_LONG("Name zu lang", "name too long"),
