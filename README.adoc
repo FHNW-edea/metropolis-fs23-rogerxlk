@@ -54,13 +54,13 @@ Dementsprechend besteht das Assignment aus drei Teilen
 *** DONE - Implementierung basiert auf den Beispielen aus `module08`
 *** DONE - `CityExplorer` für die ca. 200'000 Städte und Gemeinden
 *** DONE - `CountryExplorer` für die ca. 250 Länder
-** 2 Editoren, jeweils mit Header-, und Formular-Bereich
-*** Implementierung basiert auf den Beispielen aus `module09`
-*** `CityEditor` muss auf jeden Fall das Feld für den `COUNTRY_CODE` enthalten
-*** `CountryEditor` muss auf jeden Fall das Feld für `CAPITAL` enthalten
+** DONE - 2 Editoren, jeweils mit Header-, und Formular-Bereich
+*** DONE - Implementierung basiert auf den Beispielen aus `module09`
+*** DONE - `CityEditor` muss auf jeden Fall das Feld für den `COUNTRY_CODE` enthalten
+*** DONE - `CountryEditor` muss auf jeden Fall das Feld für `CAPITAL` enthalten
 ** neue Städte/Länder können angelegt, bestehende aus der Datenbank gelöscht werden
 ** DONE - die Explorer und Editoren müssen jeweils separat, mit einer eigenen Demo-Applikation gestartet werden können
-*** ein Beispiel wie das aussehen kann, finden Sie in `module06` beim `CodeKitchenTimer`
+*** DONE - ein Beispiel wie das aussehen kann, finden Sie in `module06` beim `CodeKitchenTimer`
 ** `Metropolis` verbindet die Explorer und Editoren zu einer Gesamtapplikation
 *** Selektion einer Stadt im `CityExplorer`
 **** "öffnet" den `CityEditor`

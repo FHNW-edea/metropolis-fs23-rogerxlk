@@ -19,14 +19,12 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import metropolis.countryeditor.controller.Id
 import metropolis.data.City
 import metropolis.xtractedEditor.controller.editor.EditorAction
 import metropolis.xtractedEditor.model.*
 import metropolis.xtractedEditor.view.VSpace
 import metropolis.xtractedEditor.view.editor.EditorBar
 import metropolis.xtractedEditor.view.editor.Form
-import metropolis.xtractedEditor.model.get
 
 
 @Composable

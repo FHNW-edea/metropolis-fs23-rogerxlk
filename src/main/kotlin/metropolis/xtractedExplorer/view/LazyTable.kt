@@ -76,7 +76,6 @@ private val headerCellBackground     = Color(230, 230, 230)
 private val darkHeaderCellBackground = Color(210, 210, 210)
 private val filterCellBackground     = Color(250, 250, 250)
 private val darkFilterCellBackground = Color(240, 240, 240)
-
 private val selectedItemBorder       = Color(80, 80, 80)
 
 
