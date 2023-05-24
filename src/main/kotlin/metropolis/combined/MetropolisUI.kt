@@ -96,10 +96,7 @@ fun MetropolisUi(
                     Text("Add new City")
                 }
                 VSpace(10.dp)
-                Table(tableState = cityState,
-                    itemProvider = cityDataProvider,
-                    idProvider = cityIdProvider,
-                    trigger = cityTrigger)
+                CityExplorerUI(cityState, cityDataProvider, cityIdProvider, cityTrigger)
             }
             1 -> {
                 VSpace(10.dp)
@@ -107,10 +104,7 @@ fun MetropolisUi(
                     Text("Add new Country")
                 }
                 VSpace(10.dp)
-                Table(tableState = countryState,
-                    itemProvider = countryDataProvider,
-                    idProvider = countryIdProvider,
-                    trigger = countryTrigger)
+                CountryExplorerUI(countryState, countryDataProvider, countryIdProvider, countryTrigger)
             }
         }
         VSpace(10.dp)

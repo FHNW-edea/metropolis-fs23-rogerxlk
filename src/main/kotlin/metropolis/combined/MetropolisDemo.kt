@@ -21,6 +21,8 @@ fun main() {
 
 
     application {
+        cityExplorer.initializeUiScope(rememberCoroutineScope())
+        countryExplorer.initializeUiScope(rememberCoroutineScope())
         MetropolisWindow(cityState = cityExplorer.state,
             cityDataProvider = { cityExplorer.getData(it) },
             cityIdProvider = { it.id },
