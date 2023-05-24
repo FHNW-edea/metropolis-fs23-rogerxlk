@@ -2,7 +2,7 @@ package metropolis.cityexplorer.controller
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import metropolis.cityexplorer.data.City
+import metropolis.data.City
 import metropolis.repository.CityColumnExplorer
 import metropolis.xtractedEditor.model.format
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
@@ -65,6 +65,5 @@ fun cityExplorerController(repository: LazyRepository<City>) =
                 valueProvider = { it.longitude },
                 formatter     = { it.format("%,.1f") }
             ),
-
         )
     )

@@ -1,6 +1,6 @@
 package metropolis.repository
 
-import metropolis.cityexplorer.data.City
+import metropolis.data.City
 import metropolis.xtractedEditor.data.DbColumnEditor
 import metropolis.xtractedEditor.repository.CrudRepository
 import metropolis.xtractedEditor.repository.asSql
@@ -42,9 +42,9 @@ fun cityCrudRepository(url: String) =
             CityColumnEditor.ALTERNATE_NAMES to { it.alternateNames?.asSql() },
             CityColumnEditor.LATITUDE to { it.latitude.toString() },
             CityColumnEditor.LONGITUDE to { it.longitude.toString() },
-            CityColumnEditor.FEATURE_CLASS to { it.featureClass.asSql() },
-            CityColumnEditor.FEATURE_CODE to { it.featureCode.asSql() },
-            CityColumnEditor.COUNTRY_CODE to { it.countryCode.asSql() },
+            CityColumnEditor.FEATURE_CLASS to { it.featureClass?.asSql() },
+            CityColumnEditor.FEATURE_CODE to { it.featureCode?.asSql() },
+            CityColumnEditor.COUNTRY_CODE to { it.countryCode?.asSql() },
             CityColumnEditor.CC2 to { it.cc2?.asSql() },
             CityColumnEditor.ADMIN1_CODE to { it.admin1Code?.asSql() },
             CityColumnEditor.ADMIN2_CODE to { it.admin2Code?.asSql() },
@@ -53,7 +53,7 @@ fun cityCrudRepository(url: String) =
             CityColumnEditor.POPULATION to { it.population.toString() },
             CityColumnEditor.ELEVATION to { it.elevation?.toString() },
             CityColumnEditor.DEM to { it.dem.toString() },
-            CityColumnEditor.TIMEZONE to { it.timezone.asSql() },
+            CityColumnEditor.TIMEZONE to { it.timezone?.asSql() },
             CityColumnEditor.MODIFICATION_DATE to { it.modificationDate.toString() }
         ),
 

@@ -1,0 +1,20 @@
+package metropolis.countryeditor
+
+import androidx.compose.ui.window.application
+import metropolis.xtractedEditor.repository.urlFromResources
+import metropolis.countryeditor.controller.countryEditor
+import metropolis.repository.countryCrudRepository
+
+fun main() {
+    val url = "/data/metropolisDB".urlFromResources()
+    val repository = countryCrudRepository(url)
+    val countryId = 100
+
+    val controller = countryEditor(countryId, repository)
+
+    application {
+        metropolis.countryeditor.view.CountryEditorUi(state = controller.state,
+            undoState = controller.undoState,
+            trigger = { controller.triggerAction(it) })
+    }
+}

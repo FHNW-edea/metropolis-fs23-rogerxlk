@@ -50,16 +50,16 @@ Dementsprechend besteht das Assignment aus drei Teilen
 === Anforderungen
 [circle]
 * Gewünschte Funktionalität
-** 2 Explorer, jeweils mit Lazy-Loading aus der lokalen Datenbank `metropolisDB`, Sortier- und Filter-Möglichkeiten auf mindestens vier Spalten
-*** Implementierung basiert auf den Beispielen aus `module08`
-*** `CityExplorer` für die ca. 200'000 Städte und Gemeinden
-*** `CountryExplorer` für die ca. 250 Länder
+** DONE - 2 Explorer, jeweils mit Lazy-Loading aus der lokalen Datenbank `metropolisDB`, Sortier- und Filter-Möglichkeiten auf mindestens vier Spalten
+*** DONE - Implementierung basiert auf den Beispielen aus `module08`
+*** DONE - `CityExplorer` für die ca. 200'000 Städte und Gemeinden
+*** DONE - `CountryExplorer` für die ca. 250 Länder
 ** 2 Editoren, jeweils mit Header-, und Formular-Bereich
 *** Implementierung basiert auf den Beispielen aus `module09`
 *** `CityEditor` muss auf jeden Fall das Feld für den `COUNTRY_CODE` enthalten
 *** `CountryEditor` muss auf jeden Fall das Feld für `CAPITAL` enthalten
 ** neue Städte/Länder können angelegt, bestehende aus der Datenbank gelöscht werden
-** die Explorer und Editoren müssen jeweils separat, mit einer eigenen Demo-Applikation gestartet werden können
+** DONE - die Explorer und Editoren müssen jeweils separat, mit einer eigenen Demo-Applikation gestartet werden können
 *** ein Beispiel wie das aussehen kann, finden Sie in `module06` beim `CodeKitchenTimer`
 ** `Metropolis` verbindet die Explorer und Editoren zu einer Gesamtapplikation
 *** Selektion einer Stadt im `CityExplorer`

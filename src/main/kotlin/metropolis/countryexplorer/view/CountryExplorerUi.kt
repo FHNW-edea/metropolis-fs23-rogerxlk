@@ -13,7 +13,7 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import metropolis.cityexplorer.data.Country
+import metropolis.data.Country
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState
 import metropolis.xtractedExplorer.view.Table

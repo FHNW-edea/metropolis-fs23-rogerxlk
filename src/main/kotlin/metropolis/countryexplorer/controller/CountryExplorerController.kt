@@ -2,7 +2,7 @@ package metropolis.countryexplorer.controller
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import metropolis.cityexplorer.data.Country
+import metropolis.data.Country
 import metropolis.repository.CountryColumnExplorer
 import metropolis.xtractedEditor.model.format
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController

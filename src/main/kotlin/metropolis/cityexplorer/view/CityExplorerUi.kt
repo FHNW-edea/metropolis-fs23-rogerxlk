@@ -13,7 +13,7 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import metropolis.cityexplorer.data.City
+import metropolis.data.City
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState
 import metropolis.xtractedExplorer.view.Table
@@ -36,9 +36,9 @@ fun ApplicationScope.CityExplorerWindow(state       : TableState<City>,
 
 @Composable
 fun CityExplorerUI(state       : TableState<City>,
-                      dataProvider: (Int) -> City,
-                      idProvider  : (City) -> Int,
-                      trigger     : (LazyTableAction) -> Unit) {
+                   dataProvider: (Int) -> City,
+                   idProvider  : (City) -> Int,
+                   trigger     : (LazyTableAction) -> Unit) {
     Column(modifier = Modifier.fillMaxSize()
         .background(Color(0xFFEEEEEE))
         .padding(10.dp)) {
