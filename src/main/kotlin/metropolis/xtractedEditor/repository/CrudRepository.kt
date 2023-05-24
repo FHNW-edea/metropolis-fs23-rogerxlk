@@ -11,7 +11,7 @@ class CrudRepository<D: Identifiable>(private val url        : String,
 
     fun createKey() : Int =
         insertAndCreateKey(url        = url,
-                           insertStmt = """INSERT INTO $table DEFAULT VALUES """.trimMargin())
+            insertStmt = """INSERT INTO $table DEFAULT VALUES """.trimMargin())
 
     fun read(id: Int) : D?  =
         readFirst(url     = url,

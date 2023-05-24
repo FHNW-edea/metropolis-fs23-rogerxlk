@@ -1,10 +1,10 @@
-package metropolis.combined
+package metropolis.metropolistool
 
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.cityexplorer.controller.cityExplorerController
-import metropolis.cityexplorer.view.CityExplorerWindow
 import metropolis.countryexplorer.controller.countryExplorerController
+import metropolis.metropolistool.view.MetropolisWindow
 import metropolis.repository.cityLazyRepository
 import metropolis.repository.countryLazyRepository
 import metropolis.xtractedEditor.repository.urlFromResources

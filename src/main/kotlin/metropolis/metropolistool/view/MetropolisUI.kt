@@ -1,4 +1,4 @@
-package metropolis.combined
+package metropolis.metropolistool.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -26,7 +26,6 @@ import metropolis.data.Country
 import metropolis.xtractedEditor.view.VSpace
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState
-import metropolis.xtractedExplorer.view.Table
 
 @Composable
 fun ApplicationScope.MetropolisWindow(
