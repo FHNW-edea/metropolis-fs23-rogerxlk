@@ -43,6 +43,10 @@ fun countryEditor(id: Int, repository: CrudRepository<Country>): EditorControlle
                     value = country.name,
                     required = true,
                     syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+                (stringAttribute(id = Id.CAPITAL,
+                    value = country.capital,
+                    required = true,
+                    syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
             )
         }
     )
