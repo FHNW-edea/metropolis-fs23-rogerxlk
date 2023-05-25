@@ -43,6 +43,8 @@ class EditorController<D: Identifiable>(val id              : Int,              
             is EditorAction.Undo      -> undo()
             is EditorAction.Redo      -> redo()
 
+            is EditorAction.Delete    -> delete()
+
             is EditorAction.SetLocale -> setLocale(action.locale)
         }
 
@@ -80,6 +82,16 @@ class EditorController<D: Identifiable>(val id              : Int,              
         undoController.triggerAction(UndoAction.Redo<EditorState<D>>(updateApplicationState =  { state = it }))
         return state
     }
+
+    private fun delete() : EditorState<D> {
+        repository.delete(id)
+        val cleanedAttributes = state.attributes.map { attribute ->
+            attribute.copy(value = null, persistedValue = null, validationResult = ValidationResult(true, null))
+        }
+
+        return state.copy(attributes = cleanedAttributes)
+    }
+
 
     private fun setLocale(locale: Locale) : EditorState<D> {
         val nextEditorState = state.copy(locale = locale)

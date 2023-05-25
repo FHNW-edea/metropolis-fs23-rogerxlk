@@ -2,10 +2,7 @@ package metropolis.xtractedEditor.controller.editor
 
 import java.util.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Cached
-import androidx.compose.material.icons.filled.Redo
-import androidx.compose.material.icons.filled.Save
-import androidx.compose.material.icons.filled.Undo
+import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.vector.ImageVector
 import metropolis.xtractedEditor.controller.Action
 import metropolis.xtractedEditor.model.Attribute
@@ -23,6 +20,7 @@ sealed class EditorAction(
 
     class  Undo(enabled: Boolean = true) : EditorAction("Undo", Icons.Filled.Undo, enabled)
     class  Redo(enabled: Boolean = true) : EditorAction("Redo", Icons.Filled.Redo, enabled)
+    object  Delete : EditorAction("Delete", Icons.Filled.Delete)
 
     class  SetLocale(val locale: Locale, enabled: Boolean) : EditorAction(locale.isO3Language, null, enabled)
 

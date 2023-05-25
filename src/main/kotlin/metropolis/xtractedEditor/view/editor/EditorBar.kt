@@ -21,8 +21,10 @@ fun EditorBar(state: EditorState<*>, undoState: UndoState, trigger : (EditorActi
 
                             listOf(
                                 EditorAction.Undo(undoState.undoAvailable),
-                                   EditorAction.Redo(undoState.redoAvailable))
+                                   EditorAction.Redo(undoState.redoAvailable)),
+                            listOf(EditorAction.Delete)
                            )
+
             ActionIconStrip(trigger,
                             listOf(
                                 EditorAction.SetLocale(CH, state.locale != CH),
