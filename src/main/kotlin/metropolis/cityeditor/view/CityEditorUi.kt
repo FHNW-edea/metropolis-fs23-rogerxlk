@@ -19,6 +19,7 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
+import metropolis.cityeditor.controller.Id
 import metropolis.data.City
 import metropolis.xtractedEditor.controller.editor.EditorAction
 import metropolis.xtractedEditor.model.*
@@ -61,14 +62,14 @@ fun CityEditorUi(state: EditorState<City>, undoState: UndoState, trigger : (Edit
 private fun Header(state: EditorState<City>) {
     // im Editor-State werden die Attribute verwaltet. Diese können generisch als Formular angezeigt werden
     // der Header ist jedoch speziell, nicht generisch (oder noch nicht)
-//    val name    : Attribute<String>       = state[Id.NAME]  //todo: nullpointer exception. why?
+    val name    : Attribute<String>       = state[Id.NAME]
 
     val huge       = 42.sp
     val large      = 18.sp
 
     Row(modifier = Modifier.height(IntrinsicSize.Max).padding(10.dp)){
         Column(modifier = Modifier.weight(1.0f)) {
-//            Headline(text = name.value.format("??"), fontSize = huge)
+            Headline(text = name.value.format("??"), fontSize = huge)
             VSpace(10.dp)
         }
     }
