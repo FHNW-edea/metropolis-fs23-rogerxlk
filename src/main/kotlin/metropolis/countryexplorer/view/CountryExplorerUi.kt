@@ -72,9 +72,9 @@ fun CountryExplorerUI(
                         )
                     ),
                     listOf(LazyTableAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
-                        ?.let { idProvider(it) })), //todo: - correct?
+                        ?.let { idProvider(it) },state.selectedId != null)), //todo: - correct?
                     listOf(LazyTableAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
-                        ?.let { idProvider(it) })), //todo: - correct?
+                        ?.let { idProvider(it) }, state.selectedId != null)), //todo: - correct?
                 )
             }
         }

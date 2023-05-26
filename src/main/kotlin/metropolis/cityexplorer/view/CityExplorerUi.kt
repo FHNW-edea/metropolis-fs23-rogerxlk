@@ -62,9 +62,9 @@ fun CityExplorerUI(
                     trigger = trigger,
                     listOf(LazyTableAction.AddItem(item = idProvider(City(id = -999, name = "")))),
                     listOf(LazyTableAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
-                        ?.let { idProvider(it) })), //todo: - correct?
+                        ?.let { idProvider(it) },state.selectedId != null)), //todo: - correct?
                     listOf(LazyTableAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
-                        ?.let { idProvider(it) })), //todo: - correct?
+                        ?.let { idProvider(it) }, state.selectedId != null)), //todo: - correct?
                 )
             }
         }
