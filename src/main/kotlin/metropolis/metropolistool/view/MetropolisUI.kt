@@ -90,18 +90,18 @@ fun MetropolisUi(
 
         when (selectedTab) {
             0 -> {
-                VSpace(10.dp)
-                Button(onClick = { /* Add new entry to City table here */ }) {
-                    Text("Add new City")
-                }
+//                VSpace(10.dp)
+//                Button(onClick = { /* Add new entry to City table here */ }) {
+//                    Text("Add new City")
+//                }
                 VSpace(10.dp)
                 CityExplorerUI(cityState, cityDataProvider, cityIdProvider, cityTrigger)
             }
             1 -> {
-                VSpace(10.dp)
-                Button(onClick = { /* Add new entry to Country table here */ }) {
-                    Text("Add new Country")
-                }
+//                VSpace(10.dp)
+//                Button(onClick = { /* Add new entry to Country table here */ }) {
+//                    Text("Add new Country")
+//                }
                 VSpace(10.dp)
                 CountryExplorerUI(countryState, countryDataProvider, countryIdProvider, countryTrigger)
             }

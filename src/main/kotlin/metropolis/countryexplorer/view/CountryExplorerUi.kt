@@ -16,36 +16,75 @@ import androidx.compose.ui.window.rememberWindowState
 import metropolis.shareddata.Country
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState
-import metropolis.xtractedExplorer.view.Table
+import metropolis.xtractedExplorer.view.*
 
 @Composable
-fun ApplicationScope.CountryExplorerWindow(state       : TableState<Country>,
-                                           dataProvider: (Int) -> Country,
-                                           idProvider  : (Country) -> Int,
-                                           trigger     : (LazyTableAction) -> Unit) {
-    Window(title          = state.title,
+fun ApplicationScope.CountryExplorerWindow(
+    state: TableState<Country>,
+    dataProvider: (Int) -> Country,
+    idProvider: (Country) -> Int,
+    trigger: (LazyTableAction) -> Unit
+) {
+    Window(
+        title = state.title,
         onCloseRequest = ::exitApplication,
-        state          = rememberWindowState(width    = 600.dp,
-            height   = 500.dp,
-            position = WindowPosition(Alignment.Center))) {
+        state = rememberWindowState(
+            width = 600.dp,
+            height = 500.dp,
+            position = WindowPosition(Alignment.Center)
+        )
+    ) {
 
         CountryExplorerUI(state, dataProvider, idProvider, trigger)
     }
 }
 
 @Composable
-fun CountryExplorerUI(state       : TableState<Country>,
-                      dataProvider: (Int) -> Country,
-                      idProvider  : (Country) -> Int,
-                      trigger     : (LazyTableAction) -> Unit) {
-    Column(modifier = Modifier.fillMaxSize()
-        .background(Color(0xFFEEEEEE))
-        .padding(10.dp)) {
-        Table(tableState   = state,
+fun CountryExplorerUI(
+    state: TableState<Country>,
+    dataProvider: (Int) -> Country,
+    idProvider: (Country) -> Int,
+    trigger: (LazyTableAction) -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+            .background(Color(0xFFEEEEEE))
+            .padding(10.dp)
+    ) {
+        Toolbar {
+            AlignLeftRight {
+                ActionIconStrip(
+                    trigger = trigger,
+                    listOf(
+                        LazyTableAction.AddItem(
+                            item = idProvider(
+                                Country(
+                                    id = -999,
+                                    name = "",
+                                    population = 0,
+                                    areaInSqKm = 0.0,
+                                    isoAlpha2 = "",
+                                    isoAlpha3 = "",
+                                    continent = "",
+                                    geonameId = 0
+                                )
+                            )
+                        )
+                    ),
+                    listOf(LazyTableAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
+                        ?.let { idProvider(it) })), //todo: - correct?
+                    listOf(LazyTableAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
+                        ?.let { idProvider(it) })), //todo: - correct?
+                )
+            }
+        }
+        Table(
+            tableState = state,
             itemProvider = dataProvider,
-            idProvider   = idProvider,
-            trigger      = trigger,
-            modifier     = Modifier.weight(1.0f))
+            idProvider = idProvider,
+            trigger = trigger,
+            modifier = Modifier.weight(1.0f)
+        )
     }
 }
 

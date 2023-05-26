@@ -14,20 +14,30 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.shareddata.City
+import metropolis.shareddata.Country
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState
+import metropolis.xtractedExplorer.view.ActionIconStrip
+import metropolis.xtractedExplorer.view.AlignLeftRight
 import metropolis.xtractedExplorer.view.Table
+import metropolis.xtractedExplorer.view.Toolbar
 
 @Composable
-fun ApplicationScope.CityExplorerWindow(state       : TableState<City>,
-                                        dataProvider: (Int) -> City,
-                                        idProvider  : (City) -> Int,
-                                        trigger     : (LazyTableAction) -> Unit) {
-    Window(title          = state.title,
+fun ApplicationScope.CityExplorerWindow(
+    state: TableState<City>,
+    dataProvider: (Int) -> City,
+    idProvider: (City) -> Int,
+    trigger: (LazyTableAction) -> Unit
+) {
+    Window(
+        title = state.title,
         onCloseRequest = ::exitApplication,
-        state          = rememberWindowState(width    = 600.dp,
-            height   = 500.dp,
-            position = WindowPosition(Alignment.Center))) {
+        state = rememberWindowState(
+            width = 600.dp,
+            height = 500.dp,
+            position = WindowPosition(Alignment.Center)
+        )
+    ) {
 
         CityExplorerUI(state, dataProvider, idProvider, trigger)
     }
@@ -35,17 +45,35 @@ fun ApplicationScope.CityExplorerWindow(state       : TableState<City>,
 
 
 @Composable
-fun CityExplorerUI(state       : TableState<City>,
-                   dataProvider: (Int) -> City,
-                   idProvider  : (City) -> Int,
-                   trigger     : (LazyTableAction) -> Unit) {
-    Column(modifier = Modifier.fillMaxSize()
-        .background(Color(0xFFEEEEEE))
-        .padding(10.dp)) {
-        Table(tableState   = state,
+fun CityExplorerUI(
+    state: TableState<City>,
+    dataProvider: (Int) -> City,
+    idProvider: (City) -> Int,
+    trigger: (LazyTableAction) -> Unit
+) {
+    Column(
+        modifier = Modifier.fillMaxSize()
+            .background(Color(0xFFEEEEEE))
+            .padding(10.dp)
+    ) {
+        Toolbar {
+            AlignLeftRight {
+                ActionIconStrip(
+                    trigger = trigger,
+                    listOf(LazyTableAction.AddItem(item = idProvider(City(id = -999, name = "")))),
+                    listOf(LazyTableAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
+                        ?.let { idProvider(it) })), //todo: - correct?
+                    listOf(LazyTableAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
+                        ?.let { idProvider(it) })), //todo: - correct?
+                )
+            }
+        }
+        Table(
+            tableState = state,
             itemProvider = dataProvider,
-            idProvider   = idProvider,
-            trigger      = trigger,
-            modifier     = Modifier.weight(1.0f))
+            idProvider = idProvider,
+            trigger = trigger,
+            modifier = Modifier.weight(1.0f)
+        )
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.ui.unit.dp
 import metropolis.shareddata.City
 import metropolis.sharedrepository.CityColumnExplorer
 import metropolis.xtractedEditor.model.format
+import metropolis.xtractedEditor.repository.CrudRepository
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
 import metropolis.xtractedExplorer.model.DoubleColumn
 import metropolis.xtractedExplorer.model.IntColumn
