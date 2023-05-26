@@ -20,7 +20,7 @@ sealed class EditorAction(
 
     class  Undo(enabled: Boolean = true) : EditorAction("Undo", Icons.Filled.Undo, enabled)
     class  Redo(enabled: Boolean = true) : EditorAction("Redo", Icons.Filled.Redo, enabled)
-    object  Delete : EditorAction("Delete", Icons.Filled.Delete)
+    object  Delete                       : EditorAction("Delete", Icons.Filled.Delete)
 
     class  SetLocale(val locale: Locale, enabled: Boolean) : EditorAction(locale.isO3Language, null, enabled)
 

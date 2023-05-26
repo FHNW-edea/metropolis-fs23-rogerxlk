@@ -1,7 +1,7 @@
 package metropolis.metropolistool.controller
 
-import metropolis.data.City
-import metropolis.data.Country
+import metropolis.shareddata.City
+import metropolis.shareddata.Country
 import metropolis.xtractedExplorer.model.TableState
 
 data class MetropolisState(

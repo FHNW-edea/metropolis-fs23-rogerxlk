@@ -1,6 +1,6 @@
 package metropolis.cityeditor.controller
 
-import metropolis.data.City
+import metropolis.shareddata.City
 import metropolis.xtractedEditor.controller.editor.EditorController
 import metropolis.xtractedEditor.model.*
 import metropolis.xtractedEditor.repository.CrudRepository

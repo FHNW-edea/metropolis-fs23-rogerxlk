@@ -4,7 +4,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.cityexplorer.controller.cityExplorerController
 import metropolis.cityexplorer.view.CityExplorerWindow
-import metropolis.repository.cityLazyRepository
+import metropolis.sharedrepository.cityLazyRepository
 import metropolis.xtractedEditor.repository.urlFromResources
 import java.util.logging.Level
 import java.util.logging.LogManager

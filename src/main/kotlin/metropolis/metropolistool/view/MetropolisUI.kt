@@ -21,8 +21,8 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.cityexplorer.view.CityExplorerUI
 import metropolis.countryexplorer.view.CountryExplorerUI
-import metropolis.data.City
-import metropolis.data.Country
+import metropolis.shareddata.City
+import metropolis.shareddata.Country
 import metropolis.xtractedEditor.view.VSpace
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState

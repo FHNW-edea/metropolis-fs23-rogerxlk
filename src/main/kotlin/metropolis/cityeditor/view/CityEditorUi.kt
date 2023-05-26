@@ -20,7 +20,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.cityeditor.controller.Id
-import metropolis.data.City
+import metropolis.shareddata.City
 import metropolis.xtractedEditor.controller.editor.EditorAction
 import metropolis.xtractedEditor.model.*
 import metropolis.xtractedEditor.view.VSpace

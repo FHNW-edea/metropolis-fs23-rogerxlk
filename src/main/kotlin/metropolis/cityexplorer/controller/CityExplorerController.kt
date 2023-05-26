@@ -2,8 +2,8 @@ package metropolis.cityexplorer.controller
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import metropolis.data.City
-import metropolis.repository.CityColumnExplorer
+import metropolis.shareddata.City
+import metropolis.sharedrepository.CityColumnExplorer
 import metropolis.xtractedEditor.model.format
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
 import metropolis.xtractedExplorer.model.DoubleColumn

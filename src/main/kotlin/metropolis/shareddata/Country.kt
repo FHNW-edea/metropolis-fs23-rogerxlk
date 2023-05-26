@@ -1,4 +1,4 @@
-package metropolis.data
+package metropolis.shareddata
 
 import metropolis.xtractedEditor.repository.Identifiable
 

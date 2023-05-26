@@ -1,6 +1,6 @@
-package metropolis.repository
+package metropolis.sharedrepository
 
-import metropolis.data.Country
+import metropolis.shareddata.Country
 import metropolis.xtractedEditor.data.DbColumnEditor
 import metropolis.xtractedEditor.repository.CrudRepository
 import metropolis.xtractedEditor.repository.asSql

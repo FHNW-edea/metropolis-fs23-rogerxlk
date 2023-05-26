@@ -4,7 +4,7 @@ import androidx.compose.ui.window.application
 import metropolis.xtractedEditor.repository.urlFromResources
 import metropolis.countryeditor.controller.countryEditor
 import metropolis.countryeditor.view.CountryEditorWindow
-import metropolis.repository.countryCrudRepository
+import metropolis.sharedrepository.countryCrudRepository
 
 fun main() {
     val url = "/data/metropolisDB".urlFromResources()

@@ -5,8 +5,8 @@ import androidx.compose.ui.window.application
 import metropolis.cityexplorer.controller.cityExplorerController
 import metropolis.countryexplorer.controller.countryExplorerController
 import metropolis.metropolistool.view.MetropolisWindow
-import metropolis.repository.cityLazyRepository
-import metropolis.repository.countryLazyRepository
+import metropolis.sharedrepository.cityLazyRepository
+import metropolis.sharedrepository.countryLazyRepository
 import metropolis.xtractedEditor.repository.urlFromResources
 import java.util.logging.Level
 import java.util.logging.LogManager
