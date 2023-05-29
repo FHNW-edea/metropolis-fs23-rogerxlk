@@ -4,10 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.Tab
-import androidx.compose.material.TabRow
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -72,41 +69,36 @@ fun MetropolisUi(
     cityTrigger: (LazyTableAction) -> Unit,
     countryTrigger: (LazyTableAction) -> Unit
 ) {
-    val (selectedTab, setSelectedTab) = remember { mutableStateOf(0) }
-    val titles = listOf(cityState.title, countryState.title)
-
-    Column(
+    val (selectedTab, onTabSelected) = remember { mutableStateOf(0) }
+    Scaffold(
         modifier = Modifier.fillMaxSize()
             .background(Color(0xFFEEEEEE))
-            .padding(10.dp)
-    ) {
-        TabRow(selectedTabIndex = selectedTab, backgroundColor = Color(0xFFD1C4E9)) {
-            titles.forEachIndexed { index, title ->
-                Tab(selected = selectedTab == index,
-                    onClick = { setSelectedTab(index) },
-                    text = { Text(title, modifier = Modifier.padding(horizontal = 10.dp)) })
+            .padding(10.dp),
+        topBar = {
+            TabRow(selectedTabIndex = selectedTab, backgroundColor = Color(0xFFD1C4E9)) {
+                Tab(selected = selectedTab == 0, modifier = Modifier.padding(10.dp), onClick = { onTabSelected(0) }) {
+                    Text(cityState.title)
+                }
+                Tab(selected = selectedTab == 1, modifier = Modifier.padding(10.dp), onClick = { onTabSelected(1) }) {
+                    Text(countryState.title)
+                }
             }
-        }
+        },
+        content = {
 
-        when (selectedTab) {
-            0 -> {
-//                VSpace(10.dp)
-//                Button(onClick = { /* Add new entry to City table here */ }) {
-//                    Text("Add new City")
-//                }
-                VSpace(10.dp)
-                CityExplorerUI(cityState, cityDataProvider, cityIdProvider, cityTrigger)
+            when (selectedTab) {
+                0 -> {
+                    VSpace(10.dp)
+                    CityExplorerUI(cityState, cityDataProvider, cityIdProvider, cityTrigger)
+                }
+
+                1 -> {
+                    VSpace(10.dp)
+                    CountryExplorerUI(countryState, countryDataProvider, countryIdProvider, countryTrigger)
+                }
             }
-            1 -> {
-//                VSpace(10.dp)
-//                Button(onClick = { /* Add new entry to Country table here */ }) {
-//                    Text("Add new Country")
-//                }
-                VSpace(10.dp)
-                CountryExplorerUI(countryState, countryDataProvider, countryIdProvider, countryTrigger)
-            }
+            VSpace(10.dp)
         }
-        VSpace(10.dp)
-    }
+    )
 }
 
