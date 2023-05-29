@@ -1,7 +1,7 @@
 package metropolis.cityeditor
 
 import androidx.compose.ui.window.application
-import metropolis.cityeditor.controller.cityEditor
+import metropolis.cityeditor.controller.cityEditorController
 import metropolis.cityeditor.view.CityEditorWindow
 import metropolis.xtractedEditor.repository.urlFromResources
 import metropolis.sharedrepository.cityCrudRepository
@@ -11,7 +11,7 @@ fun main() {
     val repository = cityCrudRepository(url)
     val cityId = 782270
 
-    val controller = cityEditor(cityId, repository)
+    val controller = cityEditorController(cityId, repository)
 
     application {
         CityEditorWindow(state = controller.state,
