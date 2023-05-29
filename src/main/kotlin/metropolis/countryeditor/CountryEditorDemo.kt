@@ -2,7 +2,7 @@ package metropolis.countryeditor
 
 import androidx.compose.ui.window.application
 import metropolis.xtractedEditor.repository.urlFromResources
-import metropolis.countryeditor.controller.countryEditor
+import metropolis.countryeditor.controller.countryEditorController
 import metropolis.countryeditor.view.CountryEditorWindow
 import metropolis.sharedrepository.countryCrudRepository
 
@@ -11,7 +11,7 @@ fun main() {
     val repository = countryCrudRepository(url)
     val countryId = 100
 
-    val controller = countryEditor(countryId, repository)
+    val controller = countryEditorController(countryId, repository)
 
     application {
         CountryEditorWindow(state = controller.state,

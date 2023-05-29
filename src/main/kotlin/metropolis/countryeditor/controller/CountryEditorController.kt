@@ -8,7 +8,7 @@ import java.util.*
 import metropolis.xtractedEditor.controller.editor.get
 
 val ch = Locale("de", "CH")
-fun countryEditor(id: Int, repository: CrudRepository<Country>): EditorController<Country> {
+fun countryEditorController(id: Int, repository: CrudRepository<Country>): EditorController<Country> {
     return EditorController(
         id = id,
         title = Message.TITLE,
