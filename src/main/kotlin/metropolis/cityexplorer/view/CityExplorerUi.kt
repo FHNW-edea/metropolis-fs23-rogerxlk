@@ -13,8 +13,9 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
+import metropolis.metropolistool.controller.MetropolisAction
+import metropolis.metropolistool.controller.MetropolisController
 import metropolis.shareddata.City
-import metropolis.shareddata.Country
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState
 import metropolis.xtractedExplorer.view.ActionIconStrip
@@ -27,7 +28,7 @@ fun ApplicationScope.CityExplorerWindow(
     state: TableState<City>,
     dataProvider: (Int) -> City,
     idProvider: (City) -> Int,
-    trigger: (LazyTableAction) -> Unit
+    trigger: (LazyTableAction) -> Unit,
 ) {
     Window(
         title = state.title,
@@ -39,7 +40,7 @@ fun ApplicationScope.CityExplorerWindow(
         )
     ) {
 
-        CityExplorerUI(state, dataProvider, idProvider, trigger)
+        CityExplorerUI(state, dataProvider, idProvider, trigger, metropolisTrigger= {})
     }
 }
 
@@ -49,8 +50,9 @@ fun CityExplorerUI(
     state: TableState<City>,
     dataProvider: (Int) -> City,
     idProvider: (City) -> Int,
-    trigger: (LazyTableAction) -> Unit
-) {
+    trigger: (LazyTableAction) -> Unit,
+    metropolisTrigger: (MetropolisAction) -> Unit,
+    ) {
     Column(
         modifier = Modifier.fillMaxSize()
             .background(Color(0xFFEEEEEE))
@@ -59,11 +61,11 @@ fun CityExplorerUI(
         Toolbar {
             AlignLeftRight {
                 ActionIconStrip(
-                    trigger = trigger,
-                    listOf(LazyTableAction.AddItem(item = idProvider(City(id = -999, name = "")))),
-                    listOf(LazyTableAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
+                    trigger = metropolisTrigger,
+                    listOf(MetropolisAction.AddItem(item = idProvider(City(id = -999, name = "")))),
+                    listOf(MetropolisAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
                         ?.let { idProvider(it) },state.selectedId != null)), //todo: - correct?
-                    listOf(LazyTableAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
+                    listOf(MetropolisAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
                         ?.let { idProvider(it) }, state.selectedId != null)), //todo: - correct?
                 )
             }

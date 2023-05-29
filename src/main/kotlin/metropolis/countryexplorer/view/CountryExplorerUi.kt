@@ -13,6 +13,7 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
+import metropolis.metropolistool.controller.MetropolisAction
 import metropolis.shareddata.Country
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState
@@ -35,7 +36,7 @@ fun ApplicationScope.CountryExplorerWindow(
         )
     ) {
 
-        CountryExplorerUI(state, dataProvider, idProvider, trigger)
+        CountryExplorerUI(state, dataProvider, idProvider, trigger, metropolisTrigger= {})
     }
 }
 
@@ -44,7 +45,8 @@ fun CountryExplorerUI(
     state: TableState<Country>,
     dataProvider: (Int) -> Country,
     idProvider: (Country) -> Int,
-    trigger: (LazyTableAction) -> Unit
+    trigger: (LazyTableAction) -> Unit,
+    metropolisTrigger: (MetropolisAction) -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -54,9 +56,9 @@ fun CountryExplorerUI(
         Toolbar {
             AlignLeftRight {
                 ActionIconStrip(
-                    trigger = trigger,
+                    trigger = metropolisTrigger,
                     listOf(
-                        LazyTableAction.AddItem(
+                        MetropolisAction.AddItem(
                             item = idProvider(
                                 Country(
                                     id = -999,
@@ -71,9 +73,9 @@ fun CountryExplorerUI(
                             )
                         )
                     ),
-                    listOf(LazyTableAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
+                    listOf(MetropolisAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
                         ?.let { idProvider(it) },state.selectedId != null)), //todo: - correct?
-                    listOf(LazyTableAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
+                    listOf(MetropolisAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
                         ?.let { idProvider(it) }, state.selectedId != null)), //todo: - correct?
                 )
             }
