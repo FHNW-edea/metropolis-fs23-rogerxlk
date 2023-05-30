@@ -14,7 +14,11 @@ fun main() {
     LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.INFO
 
     val url        = "/data/metropolisDB".urlFromResources()
-    val cityExplorerController = cityExplorerController(cityLazyRepository(url))
+    val cityExplorerController = cityExplorerController(
+        repository = cityLazyRepository(url),
+        onCreate = {},
+        onSelected = { }
+    )
 
     application {
         with(cityExplorerController){

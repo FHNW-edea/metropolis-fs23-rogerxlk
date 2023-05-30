@@ -34,7 +34,6 @@ fun ApplicationScope.CountryExplorerWindow(
             position = WindowPosition(Alignment.Center)
         )
     ) {
-
         CountryExplorerUI(state, dataProvider, idProvider, trigger)
     }
 }
@@ -51,33 +50,7 @@ fun CountryExplorerUI(
             .background(Color(0xFFEEEEEE))
             .padding(10.dp)
     ) {
-        Toolbar {
-            AlignLeftRight {
-                ActionIconStrip(
-                    trigger = trigger,
-                    listOf(
-                        LazyTableAction.AddItem(
-                            item = idProvider(
-                                Country(
-                                    id = -999,
-                                    name = "",
-                                    population = 0,
-                                    areaInSqKm = 0.0,
-                                    isoAlpha2 = "",
-                                    isoAlpha3 = "",
-                                    continent = "",
-                                    geonameId = 0
-                                )
-                            )
-                        )
-                    ),
-                    listOf(LazyTableAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
-                        ?.let { idProvider(it) },state.selectedId != null)), //todo: - correct?
-                    listOf(LazyTableAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
-                        ?.let { idProvider(it) }, state.selectedId != null)), //todo: - correct?
-                )
-            }
-        }
+        //TODO: Toolbar
         Table(
             tableState = state,
             itemProvider = dataProvider,

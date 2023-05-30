@@ -8,8 +8,11 @@ import java.util.*
 import metropolis.xtractedEditor.controller.editor.get
 
 val ch = Locale("de", "CH")
-fun cityEditorController(id: Int, repository: CrudRepository<City>): EditorController<City> {
-    return EditorController(
+fun cityEditorController(
+    id: Int,
+    repository: CrudRepository<City>,
+    onSaved: () -> Unit) =
+    EditorController(
         id = id,
         title = Message.TITLE,
         locale = ch,
@@ -51,7 +54,6 @@ fun cityEditorController(id: Int, repository: CrudRepository<City>): EditorContr
             )
         }
     )
-}
 
 
 enum class Id(override val german: String, override val english: String) : AttributeId {

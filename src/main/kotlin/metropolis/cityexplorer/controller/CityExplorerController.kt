@@ -15,9 +15,14 @@ import java.time.LocalDate
 
 private const val ELLIPSES = "..."
 
-fun cityExplorerController(repository: LazyRepository<City>) =
+fun cityExplorerController(
+    repository: LazyRepository<City>,
+    onSelected: (Int) -> Unit,
+    onCreate:   () -> Unit) =
     LazyTableController(title       = "Cities of the World",
         repository  = repository,
+        onSelected  = onSelected,
+        onCreate    = onCreate,
         defaultItem = City( -999, ELLIPSES,ELLIPSES,ELLIPSES, 0.0, 0.0, ELLIPSES, ELLIPSES, ELLIPSES,
             ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES,ELLIPSES,0,0,0,ELLIPSES,
             LocalDate.now()

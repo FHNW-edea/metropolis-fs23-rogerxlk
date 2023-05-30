@@ -14,7 +14,6 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.shareddata.City
-import metropolis.shareddata.Country
 import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
 import metropolis.xtractedExplorer.model.TableState
 import metropolis.xtractedExplorer.view.ActionIconStrip
@@ -49,7 +48,7 @@ fun CityExplorerUI(
     state: TableState<City>,
     dataProvider: (Int) -> City,
     idProvider: (City) -> Int,
-    trigger: (LazyTableAction) -> Unit
+    trigger: (LazyTableAction) -> Unit,
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -58,13 +57,8 @@ fun CityExplorerUI(
     ) {
         Toolbar {
             AlignLeftRight {
-                ActionIconStrip(
-                    trigger = trigger,
-                    listOf(LazyTableAction.AddItem(item = idProvider(City(id = -999, name = "")))),
-                    listOf(LazyTableAction.RemoveItem(item = state.selectedId?.let { dataProvider(it) }
-                        ?.let { idProvider(it) },state.selectedId != null)), //todo: - correct?
-                    listOf(LazyTableAction.UpdateItem(item = state.selectedId?.let { dataProvider(it) }
-                        ?.let { idProvider(it) }, state.selectedId != null)), //todo: - correct?
+                ActionIconStrip(trigger = trigger,
+                    listOf(LazyTableAction.AddItem(City(-999, "New")))
                 )
             }
         }

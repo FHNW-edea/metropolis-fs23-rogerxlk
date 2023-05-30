@@ -1,10 +1,10 @@
-package metropolis.metropolistool.controller
+package metropolis.cityCombined.controller
 
 import metropolis.shareddata.ControllerType
 import metropolis.xtractedExplorer.controller.ControllerBase
 
-data class MetropolisState(
+data class CityState(
     val title: String,
-    val activeController: ControllerBase<*,*>?,
+    val activeController: ControllerBase<*, *>?,
     val controllerType: ControllerType
 )

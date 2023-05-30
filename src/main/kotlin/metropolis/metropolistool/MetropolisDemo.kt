@@ -4,8 +4,11 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.cityexplorer.controller.cityExplorerController
 import metropolis.countryexplorer.controller.countryExplorerController
+import metropolis.metropolistool.controller.MetropolisController
 import metropolis.metropolistool.view.MetropolisWindow
+import metropolis.sharedrepository.cityCrudRepository
 import metropolis.sharedrepository.cityLazyRepository
+import metropolis.sharedrepository.countryCrudRepository
 import metropolis.sharedrepository.countryLazyRepository
 import metropolis.xtractedEditor.repository.urlFromResources
 import java.util.logging.Level
@@ -16,21 +19,19 @@ fun main() {
     LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).level = Level.INFO
 
     val url = "/data/metropolisDB".urlFromResources()
-    val cityExplorer = cityExplorerController(cityLazyRepository(url))
-    val countryExplorer = countryExplorerController(countryLazyRepository(url))
+    val cityExplorerRepository = cityLazyRepository(url)
+    val cityEditorRepository = cityCrudRepository(url)
+    val countryExplorerRepository = countryLazyRepository(url)
+    val countryEditorRepository = countryCrudRepository(url)
 
+    val metropolisController = MetropolisController(
+        cityExplorerRepository,
+        countryExplorerRepository,
+        cityEditorRepository,
+        countryEditorRepository,
+    )
 
     application {
-        cityExplorer.initializeUiScope(rememberCoroutineScope())
-        countryExplorer.initializeUiScope(rememberCoroutineScope())
-        MetropolisWindow(cityState = cityExplorer.state,
-            cityDataProvider = { cityExplorer.getData(it) },
-            cityIdProvider = { it.id },
-            countryState = countryExplorer.state,
-            countryDataProvider = { countryExplorer.getData(it) },
-            countryIdProvider = { it.id },
-            cityTrigger = { cityExplorer.triggerAction(it) },
-            countryTrigger = { countryExplorer.triggerAction(it) }
-        )
+        MetropolisWindow(metropolisController)
     }
 }

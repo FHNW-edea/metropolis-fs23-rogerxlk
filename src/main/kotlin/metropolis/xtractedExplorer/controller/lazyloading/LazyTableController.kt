@@ -23,8 +23,9 @@ import metropolis.xtractedExplorer.repository.LazyRepository
 
 class LazyTableController<T>(title                       : String,
                              private val repository      : LazyRepository<T>,
-//                             private val crudRepository  : CrudRepository<Identifiable>,
                              columns                     : List<TableColumn<T, *>>,
+                             val onSelected              : (Int) -> Unit = {},
+                             val onCreate                : () -> Unit = {},
                              private val defaultItem: T) :
         ControllerBase<TableState<T>, LazyTableAction>(initialState = TableState(title            = title,
                                                                                  triggerRecompose = false,
@@ -77,8 +78,10 @@ class LazyTableController<T>(title                       : String,
             else                                  -> state
         }
 
-    private fun changeSelection(id: Int) =
-         state.copy(selectedId = id)
+    private fun changeSelection(id: Int)  : TableState<T> {
+        onSelected(id)
+        return state.copy(selectedId = id)
+    }
 
 //    private fun addItem(item: Any?) =
 //        with(state) {
