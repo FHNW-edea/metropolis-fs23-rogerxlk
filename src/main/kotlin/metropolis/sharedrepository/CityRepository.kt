@@ -1,11 +1,11 @@
 package metropolis.sharedrepository
 
 import metropolis.shareddata.City
-import metropolis.xtractedEditor.data.DbColumnEditor
-import metropolis.xtractedEditor.repository.CrudRepository
-import metropolis.xtractedEditor.repository.asSql
-import metropolis.xtractedExplorer.data.DbColumnExplorer
-import metropolis.xtractedExplorer.repository.LazyRepository
+import metropolis.xtracted.xtractedEditor.data.DbColumnEditor
+import metropolis.xtracted.xtractedEditor.repository.CrudRepository
+import metropolis.xtracted.xtractedEditor.repository.asSql
+import metropolis.xtracted.xtractedExplorer.data.DbColumnExplorer
+import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 

@@ -1,7 +1,7 @@
 package metropolis.metropolistool.controller
 
 import androidx.compose.ui.graphics.vector.ImageVector
-import metropolis.xtractedEditor.controller.Action
+import metropolis.xtracted.xtractedExplorer.controller.Action
 
 sealed class MetropolisAction(
     override val name: String,

@@ -4,13 +4,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import metropolis.shareddata.City
 import metropolis.sharedrepository.CityColumnExplorer
-import metropolis.xtractedEditor.model.format
-import metropolis.xtractedEditor.repository.CrudRepository
-import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
-import metropolis.xtractedExplorer.model.DoubleColumn
-import metropolis.xtractedExplorer.model.IntColumn
-import metropolis.xtractedExplorer.model.StringColumn
-import metropolis.xtractedExplorer.repository.LazyRepository
+import metropolis.xtracted.xtractedEditor.model.format
+import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableController
+import metropolis.xtracted.xtractedExplorer.model.DoubleColumn
+import metropolis.xtracted.xtractedExplorer.model.IntColumn
+import metropolis.xtracted.xtractedExplorer.model.StringColumn
+import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 import java.time.LocalDate
 
 private const val ELLIPSES = "..."
@@ -27,7 +26,8 @@ fun cityExplorerController(
             ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES,ELLIPSES,0,0,0,ELLIPSES,
             LocalDate.now()
         ),
-        columns     = listOf(StringColumn(header        = "Name",
+        columns     = listOf(
+            StringColumn(header        = "Name",
             width         = 250.dp,
             alignment     = Alignment.CenterStart,
             fixed                 = true,

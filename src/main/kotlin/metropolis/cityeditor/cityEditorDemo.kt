@@ -3,8 +3,8 @@ package metropolis.cityeditor
 import androidx.compose.ui.window.application
 import metropolis.cityeditor.controller.cityEditorController
 import metropolis.cityeditor.view.CityEditorWindow
-import metropolis.xtractedEditor.repository.urlFromResources
 import metropolis.sharedrepository.cityCrudRepository
+import metropolis.xtracted.xtractedEditor.repository.urlFromResources
 
 fun main() {
     val url = "/data/metropolisDB".urlFromResources()

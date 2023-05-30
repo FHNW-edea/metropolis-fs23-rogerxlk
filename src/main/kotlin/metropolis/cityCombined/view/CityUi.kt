@@ -12,8 +12,8 @@ import metropolis.cityeditor.view.CityEditorUi
 import metropolis.cityexplorer.view.CityExplorerUI
 import metropolis.shareddata.City
 import metropolis.shareddata.ControllerType
-import metropolis.xtractedEditor.controller.editor.EditorController
-import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
+import metropolis.xtracted.xtractedEditor.controller.editor.EditorController
+import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableController
 
 @Composable
 fun ApplicationScope.CityWindow(controller: CityController) {
@@ -39,12 +39,14 @@ fun CityUi(controller: CityController) {
     }
 }
 
+@Composable
 fun showEditorUi(editorController: EditorController<City>) {
     CityEditorUi(state = editorController.state,
         undoState = editorController.undoState,
         trigger = { editorController.triggerAction(it) })
 }
 
+@Composable
 fun showExplorerUi(lazyTableController: LazyTableController<City>) {
     CityExplorerUI(state = lazyTableController.state,
         dataProvider = { lazyTableController.getData(it) },

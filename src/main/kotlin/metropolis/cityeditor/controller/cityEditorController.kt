@@ -1,18 +1,21 @@
 package metropolis.cityeditor.controller
 
 import metropolis.shareddata.City
-import metropolis.xtractedEditor.controller.editor.EditorController
-import metropolis.xtractedEditor.model.*
-import metropolis.xtractedEditor.repository.CrudRepository
+import metropolis.xtracted.xtractedEditor.controller.editor.EditorController
 import java.util.*
-import metropolis.xtractedEditor.controller.editor.get
+import metropolis.xtracted.xtractedEditor.controller.editor.get
+import metropolis.xtracted.xtractedEditor.model.AttributeId
+import metropolis.xtracted.xtractedEditor.model.Translatable
+import metropolis.xtracted.xtractedEditor.model.asValidationResult
+import metropolis.xtracted.xtractedEditor.model.stringAttribute
+import metropolis.xtracted.xtractedEditor.repository.CrudRepository
 
 val ch = Locale("de", "CH")
 fun cityEditorController(
     id: Int,
     repository: CrudRepository<City>,
-    onSaved: () -> Unit) =
-    EditorController(
+    onSaved: () -> Unit //todo?
+) = EditorController(
         id = id,
         title = Message.TITLE,
         locale = ch,

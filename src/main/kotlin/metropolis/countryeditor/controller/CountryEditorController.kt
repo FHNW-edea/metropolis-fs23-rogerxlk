@@ -1,15 +1,21 @@
 package metropolis.countryeditor.controller
 
 import metropolis.shareddata.Country
-import metropolis.xtractedEditor.controller.editor.EditorController
-import metropolis.xtractedEditor.model.*
-import metropolis.xtractedEditor.repository.CrudRepository
+import metropolis.xtracted.xtractedEditor.controller.editor.EditorController
+import metropolis.xtracted.xtractedEditor.model.AttributeId
+import metropolis.xtracted.xtractedEditor.model.Translatable
+import metropolis.xtracted.xtractedEditor.model.asValidationResult
+import metropolis.xtracted.xtractedEditor.model.stringAttribute
+import metropolis.xtracted.xtractedEditor.controller.editor.get
 import java.util.*
-import metropolis.xtractedEditor.controller.editor.get
+import metropolis.xtracted.xtractedEditor.repository.CrudRepository
 
 val ch = Locale("de", "CH")
-fun countryEditorController(id: Int, repository: CrudRepository<Country>): EditorController<Country> {
-    return EditorController(
+fun countryEditorController(
+    id: Int,
+    repository: CrudRepository<Country>,
+    onSaved: () -> Unit //todo?
+) = EditorController(
         id = id,
         title = Message.TITLE,
         locale = ch,
@@ -50,7 +56,6 @@ fun countryEditorController(id: Int, repository: CrudRepository<Country>): Edito
             )
         }
     )
-}
 
 
 enum class Id(override val german: String, override val english: String) : AttributeId {

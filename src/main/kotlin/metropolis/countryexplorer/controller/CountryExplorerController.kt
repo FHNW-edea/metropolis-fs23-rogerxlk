@@ -4,12 +4,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import metropolis.shareddata.Country
 import metropolis.sharedrepository.CountryColumnExplorer
-import metropolis.xtractedEditor.model.format
-import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
-import metropolis.xtractedExplorer.model.DoubleColumn
-import metropolis.xtractedExplorer.model.IntColumn
-import metropolis.xtractedExplorer.model.StringColumn
-import metropolis.xtractedExplorer.repository.LazyRepository
+import metropolis.xtracted.xtractedEditor.model.format
+import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableController
+import metropolis.xtracted.xtractedExplorer.model.DoubleColumn
+import metropolis.xtracted.xtractedExplorer.model.IntColumn
+import metropolis.xtracted.xtractedExplorer.model.StringColumn
+import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 
 private const val ELLIPSES = "..."
 

@@ -1,20 +1,20 @@
 package metropolis.metropolistool.controller
 
+import kotlinx.coroutines.CoroutineScope
 import metropolis.cityexplorer.controller.cityExplorerController
 import metropolis.countryexplorer.controller.countryExplorerController
 import metropolis.shareddata.City
 import metropolis.shareddata.ControllerType
 import metropolis.shareddata.Country
-import metropolis.xtractedEditor.repository.CrudRepository
-import metropolis.xtractedEditor.controller.ControllerBase
-import metropolis.xtractedExplorer.repository.LazyRepository
+import metropolis.xtracted.xtractedEditor.repository.CrudRepository
+import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 
 class MetropolisController(
     val cityRepository: LazyRepository<City>,
     val countryRepository: LazyRepository<Country>,
     val cityCrudRepository: CrudRepository<City>,
     val countryCrudRepository: CrudRepository<Country>
-) : ControllerBase<MetropolisState, MetropolisAction>(
+) : metropolis.xtracted.xtractedEditor.controller.ControllerBase<MetropolisState, MetropolisAction>(
     MetropolisState(
         title = "Metropolis Demo",
         activeController = cityExplorerController(cityRepository, {}, {}), //todo?
@@ -50,11 +50,11 @@ class MetropolisController(
     }
 
 
-        private fun cityEditorController(id: Int, repository: CrudRepository<City>): ControllerBase<*, *> {
+        private fun cityEditorController(id: Int, repository: CrudRepository<City>): metropolis.xtracted.xtractedEditor.controller.ControllerBase<*, *> {
             return cityEditorController(id, repository)
         }
 
-        private fun countryEditorController(id: Int, repository: CrudRepository<Country>): ControllerBase<*, *> {
+        private fun countryEditorController(id: Int, repository: CrudRepository<Country>): metropolis.xtracted.xtractedEditor.controller.ControllerBase<*, *> {
             return countryEditorController(id, repository)
         }
 
@@ -65,4 +65,12 @@ class MetropolisController(
         fun switchToCountryExplorer() {
             state = state.copy(activeController = countryExplorerController, controllerType = ControllerType.COUNTRY_EXPLORER)
         }
+
+    override suspend fun handleAction(action: MetropolisAction) {
+        TODO("Not yet implemented")
     }
+
+    override fun initializeUiScope(scope: CoroutineScope) {
+        TODO("Not yet implemented")
+    }
+}

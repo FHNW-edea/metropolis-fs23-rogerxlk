@@ -1,27 +1,29 @@
 package metropolis.cityCombined.controller
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 import metropolis.cityeditor.controller.cityEditorController
 import metropolis.cityexplorer.controller.cityExplorerController
 import metropolis.shareddata.City
 import metropolis.shareddata.ControllerType
-import metropolis.xtractedEditor.controller.Action
-import metropolis.xtractedEditor.controller.ControllerBase
-import metropolis.xtractedEditor.repository.CrudRepository
-import metropolis.xtractedExplorer.repository.LazyRepository
+import metropolis.xtracted.IControllerBase
+import metropolis.xtracted.xtractedEditor.repository.CrudRepository
+import metropolis.xtracted.xtractedExplorer.controller.Action
+import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 
 class CityController(
     val repository: LazyRepository<City>,
     val crudRepository: CrudRepository<City>,
-) : ControllerBase<CityState, Action>(
-    CityState(
+): IControllerBase<CityState, Action> {
+
+    override var state by mutableStateOf(CityState(
         title = "City Demo",
-        activeController = null,
+        activeController = createExplorerController(),
         controllerType = ControllerType.CITY_EXPLORER
-    )
-) {
-    init {
-        state = state.copy(activeController = createExplorerController())
-    }
+    ))
 
     private fun switchToEditor(id: Int) {
         state = state.copy(activeController = createEditorController(id), controllerType = ControllerType.CITY_EDITOR)
@@ -43,17 +45,36 @@ class CityController(
             onSelected = { switchToEditor(it) }
         )
 
-    private fun createEditorController(item: City): ControllerBase<*, *> =
+    private fun createEditorController(id: Int): IControllerBase<*, *> =
         cityEditorController(
-            id = item.id,
+            id = id,
             repository = crudRepository,
             onSaved = {
                 switchToOverview()
-                crudRepository.update(item)
             },
         )
 
     override fun executeAction(action: Action): CityState {
+        TODO("Not yet implemented")
+    }
+
+    override fun close() {
+        TODO("Not yet implemented")
+    }
+
+    override fun handleNextAction(): Job {
+        TODO("Not yet implemented")
+    }
+
+    override fun initializeUiScope(scope: CoroutineScope) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun handleAction(action: Action) {
+        TODO("Not yet implemented")
+    }
+
+    override fun triggerAction(action: Action): Job {
         TODO("Not yet implemented")
     }
 }

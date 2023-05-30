@@ -17,7 +17,7 @@ import metropolis.metropolistool.controller.MetropolisController
 import metropolis.shareddata.City
 import metropolis.shareddata.ControllerType
 import metropolis.shareddata.Country
-import metropolis.xtractedExplorer.controller.lazyloading.LazyTableController
+import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableController
 
 @Composable
 fun ApplicationScope.MetropolisWindow(controller: MetropolisController) {

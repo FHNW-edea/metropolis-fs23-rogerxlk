@@ -1,16 +1,13 @@
 package metropolis.metropolistool
 
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
-import metropolis.cityexplorer.controller.cityExplorerController
-import metropolis.countryexplorer.controller.countryExplorerController
 import metropolis.metropolistool.controller.MetropolisController
 import metropolis.metropolistool.view.MetropolisWindow
 import metropolis.sharedrepository.cityCrudRepository
 import metropolis.sharedrepository.cityLazyRepository
 import metropolis.sharedrepository.countryCrudRepository
 import metropolis.sharedrepository.countryLazyRepository
-import metropolis.xtractedEditor.repository.urlFromResources
+import metropolis.xtracted.xtractedEditor.repository.urlFromResources
 import java.util.logging.Level
 import java.util.logging.LogManager
 import java.util.logging.Logger

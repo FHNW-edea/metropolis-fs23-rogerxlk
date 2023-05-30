@@ -1,6 +1,6 @@
 package metropolis.shareddata
 
-import metropolis.xtractedEditor.repository.Identifiable
+import metropolis.xtracted.xtractedEditor.repository.Identifiable
 
 
 data class Country(

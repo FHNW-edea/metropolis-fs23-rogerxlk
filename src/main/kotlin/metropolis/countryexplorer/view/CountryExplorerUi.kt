@@ -14,9 +14,12 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.shareddata.Country
-import metropolis.xtractedExplorer.controller.lazyloading.LazyTableAction
-import metropolis.xtractedExplorer.model.TableState
-import metropolis.xtractedExplorer.view.*
+import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableAction
+import metropolis.xtracted.xtractedExplorer.model.TableState
+import metropolis.xtracted.xtractedExplorer.view.ActionIconStrip
+import metropolis.xtracted.xtractedExplorer.view.AlignLeftRight
+import metropolis.xtracted.xtractedExplorer.view.Table
+import metropolis.xtracted.xtractedExplorer.view.Toolbar
 
 @Composable
 fun ApplicationScope.CountryExplorerWindow(
@@ -50,7 +53,27 @@ fun CountryExplorerUI(
             .background(Color(0xFFEEEEEE))
             .padding(10.dp)
     ) {
-        //TODO: Toolbar
+        Toolbar {
+            AlignLeftRight {
+                ActionIconStrip(
+                    trigger = trigger,
+                    listOf(
+                        LazyTableAction.AddItem(
+                            Country(
+                                -999,
+                                name = "New",
+                                continent = "New",
+                                population = 0,
+                                areaInSqKm = 0.0,
+                                geonameId = 0,
+                                isoAlpha3 = "",
+                                isoAlpha2 = ""
+                            )
+                        )
+                    )
+                )
+            }
+        }
         Table(
             tableState = state,
             itemProvider = dataProvider,
