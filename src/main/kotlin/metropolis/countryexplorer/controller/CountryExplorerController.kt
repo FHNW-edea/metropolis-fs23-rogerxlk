@@ -13,9 +13,14 @@ import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 
 private const val ELLIPSES = "..."
 
-fun countryExplorerController(repository: LazyRepository<Country>) =
+fun countryExplorerController(
+    repository: LazyRepository<Country>,
+    onSelected: (Int) -> Unit,
+    onCreate:   () -> Unit) =
     LazyTableController(title       = "Countries of the World",
         repository  = repository,
+        onSelected  = onSelected,
+        onCreate    = onCreate,
         defaultItem = Country( -999, ELLIPSES,
             ELLIPSES,
             ELLIPSES, ELLIPSES, null, 0.0, 0, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES,

@@ -14,11 +14,14 @@ val ch = Locale("de", "CH")
 fun countryEditorController(
     id: Int,
     repository: CrudRepository<Country>,
-    onSaved: () -> Unit //todo?
+    onSave: () -> Unit,
+    onDelete: () -> Unit
 ) = EditorController(
         id = id,
         title = Message.TITLE,
         locale = ch,
+        onSave = onSave,
+        onDelete = onDelete,
         repository = repository,
         asData = { attributes ->
             Country(

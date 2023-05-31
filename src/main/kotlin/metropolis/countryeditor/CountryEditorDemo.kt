@@ -11,7 +11,7 @@ fun main() {
     val repository = countryCrudRepository(url)
     val countryId = 100
 
-    val controller = countryEditorController(countryId, repository, onSaved = { println("saved") })
+    val controller = countryEditorController(countryId, repository, onSave = { println("saved") }, onDelete = { println("deleted") })
 
     application {
         CountryEditorWindow(state = controller.state,

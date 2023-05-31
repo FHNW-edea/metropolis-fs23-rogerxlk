@@ -31,7 +31,7 @@ class CityController(
     private fun switchToNewEntry() {
         val newId = crudRepository.createKey("""
             |       (${CityColumnEditor.NAME}, ${CityColumnEditor.LONGITUDE}, ${CityColumnEditor.LATITUDE}, ${CityColumnEditor.FEATURE_CLASS}, ${CityColumnEditor.FEATURE_CODE}, ${CityColumnEditor.COUNTRY_CODE}, ${CityColumnEditor.POPULATION}, ${CityColumnEditor.DEM}, ${CityColumnEditor.TIMEZONE}, ${CityColumnEditor.MODIFICATION_DATE}) 
-            |VALUES ('',                       8.23178,                         46.79862,                   'P',                               'PPL',                            'CH',                             0,                              0.0,                     'Europe/Zurich',             '${LocalDate.now()}')""".trimMargin())
+            |VALUES ('',                       0.0,                         0.0,                   '',                               '',                            '',                             0,                              0.0,                     '',             '${LocalDate.now()}')""".trimMargin())
 
 
         state = state.copy(activeController = createEditorController(crudRepository.read(newId)!!),

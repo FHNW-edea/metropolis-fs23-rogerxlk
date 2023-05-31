@@ -23,7 +23,7 @@ class MetropolisController(
 ) {
 
     private var cityExplorerController = cityExplorerController(repository = cityRepository, onCreate = { }, onSelected = { }) //todo?
-    private var countryExplorerController = countryExplorerController(countryRepository)
+    private var countryExplorerController = countryExplorerController(countryRepository, onCreate = { }, onSelected = { })
     override fun executeAction(action: MetropolisAction): MetropolisState {
         return when (action) {
             is MetropolisAction.SelectCityExplorer -> {
