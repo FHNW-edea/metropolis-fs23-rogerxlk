@@ -11,25 +11,30 @@ import metropolis.xtracted.xtractedEditor.view.AlignLeftRight
 import metropolis.xtracted.xtractedEditor.view.Toolbar
 
 @Composable
-fun EditorBar(state: EditorState<*>, undoState: UndoState, trigger : (metropolis.xtracted.xtractedEditor.controller.editor.EditorAction) -> Unit) {
+fun EditorBar(state: EditorState<*>, undoState: UndoState, trigger: (EditorAction) -> Unit) {
     Toolbar {
-        AlignLeftRight{
-            ActionIconStrip(trigger,
-                            listOf(
-                                metropolis.xtracted.xtractedEditor.controller.editor.EditorAction.Save(state.changed && state.valid),
-                                   metropolis.xtracted.xtractedEditor.controller.editor.EditorAction.Reload),
+        AlignLeftRight {
+            ActionIconStrip(
+                trigger,
+                listOf(
+                    EditorAction.Save(state.changed && state.valid),
+                    EditorAction.Reload
+                ),
 
-                            listOf(
-                                metropolis.xtracted.xtractedEditor.controller.editor.EditorAction.Undo(undoState.undoAvailable),
-                                   metropolis.xtracted.xtractedEditor.controller.editor.EditorAction.Redo(undoState.redoAvailable)),
-                            listOf(metropolis.xtracted.xtractedEditor.controller.editor.EditorAction.Delete)
-                           )
+                listOf(
+                    EditorAction.Undo(undoState.undoAvailable),
+                    EditorAction.Redo(undoState.redoAvailable)
+                ),
+                listOf(EditorAction.Delete)
+            )
 
-            ActionIconStrip(trigger,
-                            listOf(
-                                metropolis.xtracted.xtractedEditor.controller.editor.EditorAction.SetLocale(CH, state.locale != CH),
-                                   metropolis.xtracted.xtractedEditor.controller.editor.EditorAction.SetLocale(Locale.ENGLISH, state.locale != Locale.ENGLISH))
-                           )
+            ActionIconStrip(
+                trigger,
+                listOf(
+                    EditorAction.SetLocale(CH, state.locale != CH),
+                    EditorAction.SetLocale(Locale.ENGLISH, state.locale != Locale.ENGLISH)
+                )
+            )
         }
     }
 }

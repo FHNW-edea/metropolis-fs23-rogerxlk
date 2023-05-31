@@ -244,7 +244,7 @@ private fun<T> TableRow(tableState: TableState<T>, idx: Int, item: T, idProvider
     with(tableState){
         var modifier = Modifier.fillMaxWidth()
                                .height(IntrinsicSize.Max)
-                               .clickable { trigger(metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableAction.Select(idProvider(item))) }
+                               .clickable { trigger(LazyTableAction.Select(idProvider(item))) }
 
         if(tableState.selectedId == idProvider(item)){
             modifier = modifier.border(width = 2.dp, color = selectedItemBorder , shape = RoundedCornerShape(6.dp))

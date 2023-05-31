@@ -7,10 +7,11 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
+import metropolis.xtracted.xtractedEditor.controller.editor.EditorAction
 import metropolis.xtracted.xtractedEditor.model.EditorState
 
 @Composable
-fun <T> Form(state: EditorState<T>, trigger: (metropolis.xtracted.xtractedEditor.controller.editor.EditorAction) -> Unit) {
+fun <T> Form(state: EditorState<T>, trigger: (EditorAction) -> Unit) {
     LazyVerticalGrid(columns               = GridCells.Fixed(2),
                      contentPadding        = PaddingValues(20.dp),
                      horizontalArrangement = Arrangement.spacedBy(30.dp),

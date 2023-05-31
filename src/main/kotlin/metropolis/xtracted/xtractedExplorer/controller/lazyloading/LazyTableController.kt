@@ -63,10 +63,8 @@ class LazyTableController<T>(title                       : String,
     override fun executeAction(action: LazyTableAction) : TableState<T> =
         when (action) {
             is LazyTableAction.Select -> changeSelection(action.id)
-//            is LazyTableAction.AddItem<*>         -> addItem(action.item)
-//            is LazyTableAction.RemoveItem<*>      -> removeItem(action.item)
-//            is LazyTableAction.UpdateItem<*>      -> updateItem(action.item)
             is LazyTableAction.SelectNext -> selectNext()
+            is LazyTableAction.AddItem<*> -> addItem()
             is LazyTableAction.SelectPrevious -> selectPrevious()
             is LazyTableAction.SetFilter<*> -> setFilter(action.column as TableColumn<T, *>, action.filter)
             is LazyTableAction.ToggleSortOrder<*> -> toggleSortOrder(action.column as TableColumn<T, *>)
@@ -78,36 +76,10 @@ class LazyTableController<T>(title                       : String,
         return state.copy(selectedId = id)
     }
 
-//    private fun addItem(item: Any?) =
-//        with(state) {
-//            crudRepository.createKey()
-//            val newId = repository.totalCount()
-//            cache[newId] = item as T
-//            changeSelection(newId)
-//            state.copy(allIds = repository.readFilteredIds(currentFilters, currentSort),
-//                       filteredCount = repository.filteredCount(currentFilters),
-//                       totalCount = repository.totalCount())
-//        }
-//
-//    private fun removeItem(item: Any?) =
-//        with(state) {
-//            crudRepository.delete(selectedId!!)
-//            cache.remove(selectedId)
-//            val newId = (selectedId ?: 0).coerceAtMost(repository.totalCount() - 1)
-//            changeSelection(newId)
-//            state.copy(allIds = repository.readFilteredIds(currentFilters, currentSort),
-//                       filteredCount = repository.filteredCount(currentFilters),
-//                       totalCount = repository.totalCount())
-//        }
-//
-//    private fun updateItem(item: Any?) =
-//        with(state) {
-//            crudRepository.update(item as Identifiable)
-//            cache[selectedId!!] = item as T
-//            state.copy(allIds = repository.readFilteredIds(currentFilters, currentSort),
-//                       filteredCount = repository.filteredCount(currentFilters),
-//                       totalCount = repository.totalCount())
-//        }
+    private fun addItem() : TableState<T> {
+        onCreate()
+        return state
+    }
 
     private  fun selectNext() =
         with(state) {

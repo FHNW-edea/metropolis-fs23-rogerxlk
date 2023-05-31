@@ -14,11 +14,14 @@ val ch = Locale("de", "CH")
 fun cityEditorController(
     id: Int,
     repository: CrudRepository<City>,
-    onSaved: () -> Unit //todo?
+    onSave: () -> Unit,
+    onDelete: () -> Unit
 ) = EditorController(
         id = id,
         title = Message.TITLE,
         locale = ch,
+        onSave = onSave,
+        onDelete = onDelete,
         repository = repository,
         // diese Attribute von City werden in der DB abgespeichert, dazu muss eine Instanz von City aus den Attributen erzeugt werden
         // todo: die abzuspeichernden Werte muss mit der Attribut-Liste übereinstimmen

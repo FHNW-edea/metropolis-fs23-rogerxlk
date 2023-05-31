@@ -21,6 +21,7 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.cityeditor.controller.Id
 import metropolis.shareddata.City
+import metropolis.xtracted.xtractedEditor.controller.editor.EditorAction
 import metropolis.xtracted.xtractedEditor.model.Attribute
 import metropolis.xtracted.xtractedEditor.model.EditorState
 import metropolis.xtracted.xtractedEditor.model.UndoState
@@ -31,7 +32,7 @@ import metropolis.xtracted.xtractedEditor.view.editor.Form
 
 
 @Composable
-fun ApplicationScope.CityEditorWindow(state: EditorState<City>, undoState: UndoState, trigger : (metropolis.xtracted.xtractedEditor.controller.editor.EditorAction) -> Unit) {
+fun ApplicationScope.CityEditorWindow(state: EditorState<City>, undoState: UndoState, trigger : (EditorAction) -> Unit) {
 
     Window(title          = state.title.translate(state.locale),
            onCloseRequest = ::exitApplication,
@@ -44,7 +45,7 @@ fun ApplicationScope.CityEditorWindow(state: EditorState<City>, undoState: UndoS
 }
 
 @Composable
-fun CityEditorUi(state: EditorState<City>, undoState: UndoState, trigger : (metropolis.xtracted.xtractedEditor.controller.editor.EditorAction) -> Unit) {
+fun CityEditorUi(state: EditorState<City>, undoState: UndoState, trigger : (EditorAction) -> Unit) {
     Column{
         EditorBar(state, undoState, trigger)
 

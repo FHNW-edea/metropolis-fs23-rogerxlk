@@ -30,12 +30,11 @@ fun ApplicationScope.CityWindow(controller: CityController) {
 
 @Composable
 fun CityUi(controller: CityController) {
-    with(controller.state) {
-        when (controllerType) {
-            ControllerType.CITY_EXPLORER -> showExplorerUi(activeController as LazyTableController<City>)
-            ControllerType.CITY_EDITOR -> showEditorUi(activeController as EditorController<City>)
-            else -> {}
-        }
+    val state = controller.state
+    when (state.controllerType) {
+        ControllerType.CITY_EXPLORER -> showExplorerUi(state.activeController as LazyTableController<City>)
+        ControllerType.CITY_EDITOR -> showEditorUi(state.activeController as EditorController<City>)
+        else -> {}
     }
 }
 

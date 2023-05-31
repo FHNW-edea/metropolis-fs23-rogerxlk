@@ -11,7 +11,7 @@ fun main() {
     val repository = cityCrudRepository(url)
     val cityId = 782270
 
-    val controller = cityEditorController(cityId, repository, onSaved = { println("saved") })
+    val controller = cityEditorController(cityId, repository, onSave = { println("saved") }, onDelete = { println("deleted") })
 
     application {
         CityEditorWindow(state = controller.state,

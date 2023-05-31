@@ -13,15 +13,15 @@ sealed class EditorAction(
         override val enabled: Boolean      = true) : Action {
 
     // Most important Action of an editor: Update the value of an attribute
-    class  Update(val attribute: Attribute<*>, val value: String) : metropolis.xtracted.xtractedEditor.controller.editor.EditorAction("Update ${attribute.id.translate(Locale.ENGLISH)}", null, !attribute.readOnly)
+    class  Update(val attribute: Attribute<*>, val value: String) : EditorAction("Update ${attribute.id.translate(Locale.ENGLISH)}", null, !attribute.readOnly)
 
-    class  Save(enabled: Boolean)        : metropolis.xtracted.xtractedEditor.controller.editor.EditorAction("Save",   Icons.Filled.Save,   enabled)
-    object Reload                        : metropolis.xtracted.xtractedEditor.controller.editor.EditorAction("Reload", Icons.Filled.Cached)
+    class  Save(enabled: Boolean)        : EditorAction("Save",   Icons.Filled.Save,   enabled)
+    object Reload                        : EditorAction("Reload", Icons.Filled.Cached)
 
-    class  Undo(enabled: Boolean = true) : metropolis.xtracted.xtractedEditor.controller.editor.EditorAction("Undo", Icons.Filled.Undo, enabled)
-    class  Redo(enabled: Boolean = true) : metropolis.xtracted.xtractedEditor.controller.editor.EditorAction("Redo", Icons.Filled.Redo, enabled)
-    object  Delete                       : metropolis.xtracted.xtractedEditor.controller.editor.EditorAction("Delete", Icons.Filled.Delete)
+    class  Undo(enabled: Boolean = true) : EditorAction("Undo", Icons.Filled.Undo, enabled)
+    class  Redo(enabled: Boolean = true) : EditorAction("Redo", Icons.Filled.Redo, enabled)
+    object  Delete                       : EditorAction("Delete", Icons.Filled.Delete)
 
-    class  SetLocale(val locale: Locale, enabled: Boolean) : metropolis.xtracted.xtractedEditor.controller.editor.EditorAction(locale.isO3Language, null, enabled)
+    class  SetLocale(val locale: Locale, enabled: Boolean) : EditorAction(locale.isO3Language, null, enabled)
 
 }

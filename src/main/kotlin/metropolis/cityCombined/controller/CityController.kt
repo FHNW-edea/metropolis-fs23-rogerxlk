@@ -25,31 +25,42 @@ class CityController(
         controllerType = ControllerType.CITY_EXPLORER
     ))
 
-    private fun switchToEditor(id: Int) {
-        state = state.copy(activeController = createEditorController(id), controllerType = ControllerType.CITY_EDITOR)
+    private fun switchToEditor(city: City) {
+        state = state.copy(activeController = createEditorController(city), controllerType = ControllerType.CITY_EDITOR)
     }
 
     private fun switchToNewEntry() {
-        val newEntry = crudRepository.createKey()
-        switchToEditor(newEntry)
+        val newId = crudRepository.createKey()
+        val newCity = City(id = newId, name = "New City")
+        state = state.copy(activeController = createEditorController(newCity), controllerType = ControllerType.CITY_EDITOR)
     }
 
     private fun switchToOverview() {
-        state = state.copy(activeController = createExplorerController())
+        state = state.copy(activeController = createExplorerController(), controllerType = ControllerType.CITY_EXPLORER)
     }
 
     private fun createExplorerController() =
         cityExplorerController(
             repository = repository,
             onCreate = { switchToNewEntry() },
-            onSelected = { switchToEditor(it) }
+            onSelected = {
+                val selectedCity = repository.read(it)
+                if (selectedCity != null) {
+                    switchToEditor(selectedCity)
+                }
+            }
         )
 
-    private fun createEditorController(id: Int): IControllerBase<*, *> =
+    private fun createEditorController(city: City): IControllerBase<*, *> =
         cityEditorController(
-            id = id,
+            id = city.id,
             repository = crudRepository,
-            onSaved = {
+            onSave = {
+                crudRepository.update(city)
+                switchToOverview()
+            },
+            onDelete = {
+                crudRepository.delete(city.id)
                 switchToOverview()
             },
         )
