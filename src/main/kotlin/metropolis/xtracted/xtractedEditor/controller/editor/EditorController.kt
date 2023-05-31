@@ -165,13 +165,6 @@ class EditorController<D: Identifiable>(val id              : Int,              
             }
         }
 
-    override suspend fun handleAction(action: EditorAction) {
-        TODO("Not yet implemented")
-    }
-
-    override fun initializeUiScope(scope: CoroutineScope) {
-        TODO("Not yet implemented")
-    }
 
 }
 

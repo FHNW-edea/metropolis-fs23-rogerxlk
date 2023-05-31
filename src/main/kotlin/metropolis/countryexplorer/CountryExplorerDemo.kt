@@ -18,7 +18,7 @@ fun main() {
 
     application {
         with(countryExplorerController){
-            initializeUiScope(rememberCoroutineScope())
+            uiScope = rememberCoroutineScope()
             CountryExplorerWindow(state        = state,
                 dataProvider = { getData(it) },
                 idProvider   = { it.id },

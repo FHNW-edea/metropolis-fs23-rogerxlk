@@ -9,9 +9,9 @@ class CrudRepository<D: Identifiable>(private val url        : String,
                                       private val dataColumns: Map<DbColumnEditor, (D) -> String?>, //gibt an welcher Wert in die entsprechende DB-Column geschrieben werden soll
                                       private val mapper     : ResultSet.() -> D) {
 
-    fun createKey() : Int =
+    fun createKey(defaultValues: String = "DEFAULT VALUES") : Int =
         insertAndCreateKey(url        = url,
-            insertStmt = """INSERT INTO $table DEFAULT VALUES """.trimMargin())
+                           insertStmt = """INSERT INTO $table $defaultValues """.trimMargin())
 
     fun read(id: Int) : D?  =
         readFirst(url     = url,

@@ -4,7 +4,7 @@ import java.util.*
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.ui.focus.FocusRequester
 import kotlinx.coroutines.*
-import metropolis.xtracted.xtractedExplorer.controller.ControllerBase
+import metropolis.xtracted.xtractedEditor.controller.ControllerBase
 import metropolis.xtracted.xtractedExplorer.controller.LRUCache
 import metropolis.xtracted.xtractedExplorer.controller.Scheduler
 import metropolis.xtracted.xtractedExplorer.data.Filter
@@ -34,7 +34,7 @@ class LazyTableController<T>(title                       : String,
                                                                                  totalCount       = repository.totalCount(),
                                                                                  columns          = columns
                                                                                 )
-                                                         ) {
+                                                      ) {
     // filtern erst nach einer gewissen 'Ruhezeit'
     private val filterScheduler = Scheduler(200)
 
@@ -166,8 +166,5 @@ class LazyTableController<T>(title                       : String,
         state = state.copy(triggerRecompose = !state.triggerRecompose)
     }
 
-    override fun handleNextAction(): Job {
-        TODO("Not yet implemented")
-    }
 }
 

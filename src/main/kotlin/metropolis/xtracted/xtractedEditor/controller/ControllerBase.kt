@@ -10,19 +10,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.neverEqualPolicy
 import androidx.compose.runtime.setValue
-import metropolis.xtracted.IControllerBase
 import metropolis.xtracted.xtractedExplorer.controller.Action
 
 abstract class ControllerBase<S, A: Action> (initialState: S,
                                              val testMode: Boolean = false  //nur für Unit-Tests !!
-                                             ): IControllerBase<S, A> {
+                                             ) {
 
-    final override var state by mutableStateOf(initialState, policy = neverEqualPolicy())
+    final var state by mutableStateOf(initialState, policy = neverEqualPolicy())
         set
 
     val ioScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
     val actionChannel = Channel<A>(Channel.UNLIMITED)
+
+    lateinit var uiScope: CoroutineScope
 
     init {
         if(!testMode){
@@ -35,7 +36,7 @@ abstract class ControllerBase<S, A: Action> (initialState: S,
      *
      * Durch den Channel lässt sich die Reihenfolgetreue der Actions sicherstellen.
      */
-    override fun triggerAction(action: A) =
+    fun triggerAction(action: A) =
         ioScope.launch {
             actionChannel.send(action)
         }
@@ -45,7 +46,7 @@ abstract class ControllerBase<S, A: Action> (initialState: S,
      *
      * Erst wenn die Action komplett ausgeführt ist und der State neu gesetzt ist, wird die nächste Action ausgeführt.
      */
-    override fun handleNextAction() : Job =
+    fun handleNextAction() : Job =
         ioScope.launch {
             val action = actionChannel.receive()  // warten auf die nächste Action im Channel
 
@@ -61,12 +62,12 @@ abstract class ControllerBase<S, A: Action> (initialState: S,
     /**
      * führt die Action aus und liefert den neuen State zurück
      */
-    abstract override fun executeAction(action: A) : S
+    abstract fun executeAction(action: A) : S
 
     /**
      * Wenn der Controller nicht mehr benötigt wird, muss der Channel geschlossen werden.
      */
-    override fun close() {
+    fun close() {
         actionChannel.cancel()
         actionChannel.close()
     }

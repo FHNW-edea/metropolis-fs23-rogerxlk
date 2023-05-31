@@ -22,7 +22,7 @@ fun main() {
 
     application {
         with(cityExplorerController){
-            initializeUiScope(rememberCoroutineScope())
+            uiScope = rememberCoroutineScope()
             CityExplorerWindow(state        = state,
                 dataProvider = { getData(it) },
                 idProvider   = { it.id },

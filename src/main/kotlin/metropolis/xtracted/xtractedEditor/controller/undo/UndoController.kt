@@ -75,13 +75,7 @@ class UndoController<S>(private var debounceStart: S, delay : Long = 200L)
 
     private fun <S> ArrayDeque<S>.pop() : S = removeFirst()
     private fun <S> ArrayDeque<S>.push(element: S) = addFirst(element)
-    override suspend fun handleAction(action: UndoAction) {
-        TODO("Not yet implemented")
-    }
 
-    override fun initializeUiScope(scope: CoroutineScope) {
-        TODO("Not yet implemented")
-    }
 }
 
 

@@ -66,11 +66,5 @@ class MetropolisController(
             state = state.copy(activeController = countryExplorerController, controllerType = ControllerType.COUNTRY_EXPLORER)
         }
 
-    override suspend fun handleAction(action: MetropolisAction) {
-        TODO("Not yet implemented")
-    }
 
-    override fun initializeUiScope(scope: CoroutineScope) {
-        TODO("Not yet implemented")
-    }
 }
