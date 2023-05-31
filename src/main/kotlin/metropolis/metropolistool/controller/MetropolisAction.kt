@@ -8,6 +8,6 @@ sealed class MetropolisAction(
     override val icon: ImageVector? = null,
     override val enabled: Boolean
 ) : Action {
-    object SelectCityExplorer : MetropolisAction("Select City", null, true)
-    object SelectCountryExplorer : MetropolisAction("Select Country", null, true)
+    object SelectCity : MetropolisAction("Select City", null, true)
+    object SelectCountry : MetropolisAction("Select Country", null, true)
 }

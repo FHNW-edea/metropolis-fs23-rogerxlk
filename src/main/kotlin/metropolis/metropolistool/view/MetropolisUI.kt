@@ -10,7 +10,11 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
+import metropolis.cityCombined.controller.CityController
+import metropolis.cityCombined.view.CityUi
 import metropolis.cityexplorer.view.CityExplorerUI
+import metropolis.countryCombined.controller.CountryController
+import metropolis.countryCombined.view.CountryUi
 import metropolis.countryexplorer.view.CountryExplorerUI
 import metropolis.metropolistool.controller.MetropolisAction
 import metropolis.metropolistool.controller.MetropolisController
@@ -42,38 +46,20 @@ fun MetropolisUi(controller: MetropolisController,
     Scaffold(
         topBar = {
             TabRow(selectedTabIndex = selectedTab) {
-                Tab(selected = selectedTab == 0, onClick = { onTabSelected(0); trigger(MetropolisAction.SelectCityExplorer) }) {
+                Tab(selected = selectedTab == 0, onClick = { onTabSelected(0); trigger(MetropolisAction.SelectCity) }) {
                     Text("Cities")
                 }
-                Tab(selected = selectedTab == 1, onClick = { onTabSelected(1); trigger(MetropolisAction.SelectCountryExplorer) }) {
+                Tab(selected = selectedTab == 1, onClick = { onTabSelected(1); trigger(MetropolisAction.SelectCountry) }) {
                     Text("Countries")
                 }
             }
         },
         content = {
             when (controller.state.controllerType) {
-                ControllerType.CITY_EXPLORER -> showCityExplorerUi(controller.state.activeController as LazyTableController<City>)
-                ControllerType.COUNTRY_EXPLORER -> showCountryExplorerUi(controller.state.activeController as LazyTableController<Country>)
+                ControllerType.CITY -> CityUi(controller.state.activeController as CityController)
+                ControllerType.COUNTRY -> CountryUi(controller.state.activeController as CountryController)
                 else -> {}
             }
         }
-    )
-}
-
-@Composable
-private fun showCityExplorerUi(controller: LazyTableController<City>) {
-    CityExplorerUI(state = controller.state,
-        dataProvider = { controller.getData(it) },
-        idProvider = { it.id },
-        trigger = { controller.triggerAction(it) }
-    )
-}
-
-@Composable
-fun showCountryExplorerUi(controller: LazyTableController<Country>) {
-    CountryExplorerUI(state = controller.state,
-        dataProvider = { controller.getData(it) },
-        idProvider = { it.id },
-        trigger = { controller.triggerAction(it) }
     )
 }

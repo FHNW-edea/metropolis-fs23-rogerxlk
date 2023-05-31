@@ -57,7 +57,7 @@ fun countryCrudRepository(url: String) =
 
         mapper      = { Country(isoAlpha2           = getString("${CountryColumnEditor.ISO_ALPHA2}"),
             isoAlpha3           = getString("${CountryColumnEditor.ISO_ALPHA3}"),
-            id                  = getInt   ("${CountryColumnEditor.ISO_NUMERIC}"),
+            isoNumeric          = getInt   ("${CountryColumnEditor.ISO_NUMERIC}"),
             fipsCode            = getString("${CountryColumnEditor.FIPS_CODE}"),
             name                = getString("${CountryColumnEditor.NAME}"),
             capital             = getString("${CountryColumnEditor.CAPITAL}"),
@@ -129,7 +129,7 @@ fun countryLazyRepository(url: String) =
             Country(
                 isoAlpha2 = getString(CountryColumnExplorer.ISO_ALPHA2.name),
                 isoAlpha3 = getString(CountryColumnExplorer.ISO_ALPHA3.name),
-                id = getInt(CountryColumnExplorer.ISO_NUMERIC.name),
+                isoNumeric = getInt(CountryColumnExplorer.ISO_NUMERIC.name),
                 fipsCode = getString(CountryColumnExplorer.FIPS_CODE.name),
                 name = getString(CountryColumnExplorer.NAME.name),
                 capital = getString(CountryColumnExplorer.CAPITAL.name),

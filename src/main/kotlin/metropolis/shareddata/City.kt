@@ -21,6 +21,6 @@ data class City(
     val population: Int? = null,
     val elevation: Int? = null,
     val dem: Int?   = null,
-    val timezone: String?   = null,
-    val modificationDate: LocalDate?    = null
+    val timezone: String? = null,
+    val modificationDate: LocalDate? = null
 ) : Identifiable

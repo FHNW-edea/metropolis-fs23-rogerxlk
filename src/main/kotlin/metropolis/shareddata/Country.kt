@@ -4,7 +4,7 @@ import metropolis.xtracted.xtractedEditor.repository.Identifiable
 
 
 data class Country(
-    override val id: Int,
+    val isoNumeric  : Int,
     val isoAlpha2: String,
     val isoAlpha3: String,
     val fipsCode: String? = null,
@@ -23,4 +23,7 @@ data class Country(
     val geonameId: Long,
     val neighbours: String? = null,
     val equivalentFipsCode: String? = null
-) : Identifiable
+) : Identifiable {
+    override val id: Int
+        get() = isoNumeric
+}

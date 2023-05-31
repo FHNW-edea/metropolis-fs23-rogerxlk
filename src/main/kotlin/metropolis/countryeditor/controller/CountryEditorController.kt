@@ -25,7 +25,7 @@ fun countryEditorController(
         repository = repository,
         asData = { attributes ->
             Country(
-                id = id,
+                isoNumeric = id,
                 isoAlpha2 = attributes[Id.ISO_ALPHA2],
                 isoAlpha3 = attributes[Id.ISO_ALPHA3],
                 fipsCode = attributes[Id.FIPS_CODE],
