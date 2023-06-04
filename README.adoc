@@ -4,8 +4,12 @@
 
 * Roger Sennhauser
 
-https://www.figma.com/proto/QCL8VFHMJKZkx6bWbOyEk2/Untitled?page-id=0%3A1&type=design&node-id=1-85409&viewport=414%2C873%2C0.06&scaling=min-zoom&starting-point-node-id=1%3A85409[Clickable Prototype]
-https://www.figma.com/file/QCL8VFHMJKZkx6bWbOyEk2/Untitled?type=design&node-id=1%3A85409&t=lvqPmHhghYdnByoN-1[Figma Design]
+* https://www.figma.com/proto/QCL8VFHMJKZkx6bWbOyEk2/Untitled?page-id=0%3A1&type=design&node-id=1-85409&viewport=414%2C873%2C0.06&scaling=min-zoom&starting-point-node-id=1%3A85409[Clickable Prototype]
+* https://www.figma.com/file/QCL8VFHMJKZkx6bWbOyEk2/Untitled?type=design&node-id=1%3A85409&t=lvqPmHhghYdnByoN-1[Figma Design]
+
+=== Frage @Dieter Holz
+* Wie hätte ich im file `src/main/kotlin/metropolis/metropolis/controller/MetropolisController.kt`den Switch der Controllers (city <-> country) anhand den MetropolisAction lösen können?
+
 === Abgabe
 
 * Montag, 5.6.2023, 8:00 Uhr
@@ -60,17 +64,17 @@ Dementsprechend besteht das Assignment aus drei Teilen
 *** DONE - Implementierung basiert auf den Beispielen aus `module09`
 *** DONE - `CityEditor` muss auf jeden Fall das Feld für den `COUNTRY_CODE` enthalten
 *** DONE - `CountryEditor` muss auf jeden Fall das Feld für `CAPITAL` enthalten
-** neue Städte/Länder können angelegt, bestehende aus der Datenbank gelöscht werden
+** DONE - neue Städte/Länder können angelegt, bestehende aus der Datenbank gelöscht werden
 ** DONE - die Explorer und Editoren müssen jeweils separat, mit einer eigenen Demo-Applikation gestartet werden können
 *** DONE - ein Beispiel wie das aussehen kann, finden Sie in `module06` beim `CodeKitchenTimer`
-** `Metropolis` verbindet die Explorer und Editoren zu einer Gesamtapplikation
-*** Selektion einer Stadt im `CityExplorer`
-**** "öffnet" den `CityEditor`
-**** zeigt die Länder-Information in geeigneter Weise im `CountryExplorer`/`CountryEditor` an
-*** Selektion eines Landes im `CountryExplorer`
-**** öffnet den `CountryEditor`
-**** zeigt die Information der Hauptstadt in geeigneter Weise im `CityExplorer`/`CityEditor` an
-**** zeigt die Städte dieses Landes in geeigneter Weise im `CityExplorer` an
+** DONE - `Metropolis` verbindet die Explorer und Editoren zu einer Gesamtapplikation
+*** DONE - Selektion einer Stadt im `CityExplorer`
+**** DONE - "öffnet" den `CityEditor`
+**** DONE - zeigt die Länder-Information in geeigneter Weise im `CountryExplorer`/`CountryEditor` an
+*** DONE - Selektion eines Landes im `CountryExplorer`
+**** DONE - öffnet den `CountryEditor`
+**** DONE - zeigt die Information der Hauptstadt in geeigneter Weise im `CityExplorer`/`CityEditor` an
+**** DONE - zeigt die Städte dieses Landes in geeigneter Weise im `CityExplorer` an
 ** _Wichtiger Hinweis_: Es sind Veränderungen und Erweiterungen in den `xtracted`-Packages notwendig. Diese können nicht unverändert übernommen werden.
 * Die Implementierungssprache für die gesamte Applikation ist Kotlin
 * Das UI ist mit Compose Desktop zu entwickeln
