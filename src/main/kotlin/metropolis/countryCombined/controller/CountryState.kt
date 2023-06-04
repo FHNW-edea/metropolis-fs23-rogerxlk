@@ -5,6 +5,6 @@ import metropolis.xtracted.xtractedEditor.controller.ControllerBase
 
 data class CountryState (
     val title: String,
-    val activeController: ControllerBase<*, *>?,
+    var activeController: ControllerBase<*, *>?,
     val controllerType: ControllerType
 )

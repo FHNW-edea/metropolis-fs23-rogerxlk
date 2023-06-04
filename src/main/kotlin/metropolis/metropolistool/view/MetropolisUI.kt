@@ -12,16 +12,10 @@ import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.cityCombined.controller.CityController
 import metropolis.cityCombined.view.CityUi
-import metropolis.cityexplorer.view.CityExplorerUI
 import metropolis.countryCombined.controller.CountryController
 import metropolis.countryCombined.view.CountryUi
-import metropolis.countryexplorer.view.CountryExplorerUI
-import metropolis.metropolistool.controller.MetropolisAction
 import metropolis.metropolistool.controller.MetropolisController
-import metropolis.shareddata.City
 import metropolis.shareddata.ControllerType
-import metropolis.shareddata.Country
-import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableController
 
 @Composable
 fun ApplicationScope.MetropolisWindow(controller: MetropolisController) {
@@ -34,28 +28,31 @@ fun ApplicationScope.MetropolisWindow(controller: MetropolisController) {
             position = WindowPosition(Alignment.Center)
         )
     ) {
-        MetropolisUi(controller, trigger = { controller.executeAction(it) })
+        MetropolisUi(controller)
     }
 }
 
 @Composable
-fun MetropolisUi(controller: MetropolisController,
-                 trigger: (MetropolisAction) -> Unit,
+fun MetropolisUi(
+    controller: MetropolisController,
 ) {
     val (selectedTab, onTabSelected) = remember { mutableStateOf(0) }
     Scaffold(
         topBar = {
             TabRow(selectedTabIndex = selectedTab) {
-                Tab(selected = selectedTab == 0, onClick = { onTabSelected(0); trigger(MetropolisAction.SelectCity) }) {
+                Tab(selected = selectedTab == 0, onClick = { onTabSelected(0); controller.switchToCityTable() }) {
                     Text(controller.cityController.state.title)
                 }
-                Tab(selected = selectedTab == 1, onClick = { onTabSelected(1); trigger(MetropolisAction.SelectCountry) }) {
+                Tab(
+                    selected = selectedTab == 1,
+                    onClick = { onTabSelected(1); controller.switchToCountryTable() }) {
                     Text(controller.countryController.state.title)
                 }
             }
         },
         content = {
-            when (controller.state.controllerType) {
+            val state = controller.state
+            when (state.controllerType) {
                 ControllerType.CITY -> CityUi(controller.state.activeController as CityController)
                 ControllerType.COUNTRY -> CountryUi(controller.state.activeController as CountryController)
                 else -> {}

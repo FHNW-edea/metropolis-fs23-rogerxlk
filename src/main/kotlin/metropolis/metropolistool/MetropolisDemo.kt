@@ -4,7 +4,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.cityCombined.controller.CityController
 import metropolis.countryCombined.controller.CountryController
-import metropolis.metropolistool.controller.MetropolisAction
 import metropolis.metropolistool.controller.MetropolisController
 import metropolis.metropolistool.view.MetropolisWindow
 import metropolis.sharedrepository.cityCrudRepository
@@ -27,15 +26,25 @@ fun main() {
         val countryExplorerRepository = countryLazyRepository(url)
         val countryEditorRepository = countryCrudRepository(url)
 
+        val cityController = CityController(cityExplorerRepository, cityEditorRepository)
+        val countryController = CountryController(countryExplorerRepository, countryEditorRepository)
+
         val metropolisController = MetropolisController(
-            cityController = CityController(cityExplorerRepository, cityEditorRepository),
-            countryController = CountryController(countryExplorerRepository, countryEditorRepository),
+            cityController = cityController,
+            countryController = countryController,
         )
 
-        metropolisController.executeAction(MetropolisAction.SelectCity)
+        metropolisController.switchToCityTable()
         application {
+            cityController.uiScope = rememberCoroutineScope()
+            cityController.state.activeController?.uiScope = cityController.uiScope
+
+            countryController.uiScope = rememberCoroutineScope()
+            countryController.state.activeController?.uiScope = cityController.uiScope
+
             metropolisController.uiScope = rememberCoroutineScope()
             metropolisController.state.activeController?.uiScope = metropolisController.uiScope
+
             MetropolisWindow(metropolisController)
         }
     } catch (e: Exception) {

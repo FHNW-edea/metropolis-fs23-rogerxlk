@@ -24,6 +24,9 @@ class CityController(
     )
 ) {
 
+    init {
+        state.activeController = createExplorerController()
+    }
 
     private fun switchToEditor(city: City) {
         state = state.copy(

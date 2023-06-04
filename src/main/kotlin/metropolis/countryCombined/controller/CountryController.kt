@@ -22,6 +22,9 @@ class CountryController(
     )
 ) {
 
+    init {
+        state.activeController = createExplorerController()
+    }
 
     private fun switchToEditor(country: Country) {
         state = state.copy(
