@@ -15,8 +15,8 @@ class EditorController<D: Identifiable>(val id              : Int,              
                                         val repository      : CrudRepository<D>,
                                         val asData          : (List<Attribute<*>>) -> D,  // die Attribute müssen in eine Instanz der data class umgewandelt werden können. Das wird z.B. für das Speichern benötigt
                                         val asAttributeList : (D) -> List<Attribute<*>>,  // die Instanz der data class wird in eine Liste von Attributen gemappt. Damit werden die von der DB gelieferten Daten im Formular editierbar
-                                        val onSave         : () -> Unit = {},
-                                        val onDelete       : () -> Unit = {},
+                                        val onSave          : () -> Unit = {},
+                                        val onDelete        : () -> Unit = {},
                                         title               : Translatable,
                                         locale              : Locale,
                                         testMode: Boolean = false) :
@@ -61,14 +61,13 @@ class EditorController<D: Identifiable>(val id              : Int,              
     }
 
     private fun save() : EditorState<D> {
+        onSave() //todo?
         repository.update(asData(state.attributes))
         val updatedAttributes = buildList {
             for(attribute in state.attributes){
                 add(attribute.copy(persistedValue = attribute.value))
             }
-
         }
-        onSave()
         return state.copy(attributes =  updatedAttributes)
     }
 

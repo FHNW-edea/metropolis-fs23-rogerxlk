@@ -38,25 +38,24 @@ fun cityCrudRepository(url: String) =
         idColumn = CityColumnEditor.ID,
         dataColumns = mapOf(
             CityColumnEditor.NAME to { it.name.asSql() },
-            CityColumnEditor.ASCII_NAME to { it.asciiName?.asSql() },
-            CityColumnEditor.ALTERNATE_NAMES to { it.alternateNames?.asSql() },
-            CityColumnEditor.LATITUDE to { it.latitude.toString() },
-            CityColumnEditor.LONGITUDE to { it.longitude.toString() },
-            CityColumnEditor.FEATURE_CLASS to { it.featureClass?.asSql() },
-            CityColumnEditor.FEATURE_CODE to { it.featureCode?.asSql() },
-            CityColumnEditor.COUNTRY_CODE to { it.countryCode?.asSql() },
-            CityColumnEditor.CC2 to { it.cc2?.asSql() },
-            CityColumnEditor.ADMIN1_CODE to { it.admin1Code?.asSql() },
-            CityColumnEditor.ADMIN2_CODE to { it.admin2Code?.asSql() },
-            CityColumnEditor.ADMIN3_CODE to { it.admin3Code?.asSql() },
-            CityColumnEditor.ADMIN4_CODE to { it.admin4Code?.asSql() },
-            CityColumnEditor.POPULATION to { it.population.toString() },
-            CityColumnEditor.ELEVATION to { it.elevation?.toString() },
-            CityColumnEditor.DEM to { it.dem.toString() },
-            CityColumnEditor.TIMEZONE to { it.timezone?.asSql() },
-            CityColumnEditor.MODIFICATION_DATE to { it.modificationDate.toString() }
+            CityColumnEditor.ASCII_NAME to { it.asciiName?.asSql() ?: "'NA'" },
+            CityColumnEditor.ALTERNATE_NAMES to { it.alternateNames?.asSql() ?: "'NA'" },
+            CityColumnEditor.LATITUDE to { it.latitude?.toString() ?: "0.0" },
+            CityColumnEditor.LONGITUDE to { it.longitude?.toString() ?: "0.0" },
+            CityColumnEditor.FEATURE_CLASS to { it.featureClass?.asSql() ?: "'NA'" },
+            CityColumnEditor.FEATURE_CODE to { it.featureCode?.asSql() ?: "'NA'" },
+            CityColumnEditor.COUNTRY_CODE to { it.countryCode?.asSql() ?: "'NA'" },
+            CityColumnEditor.CC2 to { it.cc2?.asSql() ?: "'NA'" },
+            CityColumnEditor.ADMIN1_CODE to { it.admin1Code?.asSql() ?: "'NA'" },
+            CityColumnEditor.ADMIN2_CODE to { it.admin2Code?.asSql() ?: "'NA'" },
+            CityColumnEditor.ADMIN3_CODE to { it.admin3Code?.asSql() ?: "'NA'" },
+            CityColumnEditor.ADMIN4_CODE to { it.admin4Code?.asSql() ?: "'NA'" },
+            CityColumnEditor.POPULATION to { it.population?.toString() ?: "0" },
+            CityColumnEditor.ELEVATION to { it.elevation?.toString() ?: "0" },
+            CityColumnEditor.DEM to { it.dem?.toString() ?: "0" },
+            CityColumnEditor.TIMEZONE to { it.timezone?.asSql() ?: "'NA'" },
+            CityColumnEditor.MODIFICATION_DATE to { it.modificationDate?.toString() ?: "'1970-01-01'" }
         ),
-
         mapper = {
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
             val modificationDate: LocalDate =

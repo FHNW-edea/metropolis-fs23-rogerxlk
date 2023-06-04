@@ -76,6 +76,31 @@ fun doubleAttribute(id               : AttributeId,
               dependentAttributes = dependentAttributes
              )
 
+    fun integerAttribute(id               : AttributeId,
+                         value            : Int?,
+                         validationRegex  : Regex                                                                 = intCHRegex,
+                         semanticValidator: (Int?) -> ValidationResult = { ValidationResult(true, null) },
+                         unit             : String                                                                = "",
+                         required         : Boolean                                                               = false,
+                         readOnly         : Boolean                                                               = false,
+                         dependentAttributes: Map<AttributeId, (Attribute<Int>, Attribute<*>) -> Attribute<*>> = emptyMap())  =
+        Attribute(id                  = id,
+            value               = value,
+            persistedValue      = value,
+            valueAsText         = value.format(nullFormat = ""),
+            formatter           = { value, userInput -> value.format(nullFormat = "") },
+            converter           = { it.asInt() },
+            unit                = unit,
+            required            = required,
+            readOnly            = readOnly,
+            syntaxValidator     = { it.matches(validationRegex).asValidationResult(ErrorMessage.NOT_A_INT) },
+            semanticValidator   = semanticValidator,
+            validationResult    = ValidationResult(true, null),
+            span                = 1,
+            dependentAttributes = dependentAttributes
+        )
+
+
 
 interface AttributeId : Translatable
 
@@ -101,7 +126,8 @@ fun Boolean.asValidationResult(errorMessage: Translatable) =
 
 
 private enum class ErrorMessage(override val german: String, override val english: String) : Translatable {
-    NOT_A_DOUBLE("keine Kommazahl", "not a decimal")
+    NOT_A_DOUBLE("keine Kommazahl", "not a decimal"),
+    NOT_A_INT("keine ganze Zahl", "not an integer")
 }
 
 
@@ -118,6 +144,14 @@ fun Double?.format(userInput: String, nullFormat: String = "?", locale: Locale =
         }
         pattern.format(locale, this)
     }
+
+fun Int?.format(nullFormat: String = "?", locale: Locale = CH) : String =
+    if (null == this) {
+        nullFormat
+    } else {
+        "%,d".format(locale, this)
+    }
+
 
 fun Number?.pp(pattern: String, nullFormat: String = ""): String {
     return if (null == this) nullFormat else pattern.format(CH, this)

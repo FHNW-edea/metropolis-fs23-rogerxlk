@@ -47,10 +47,10 @@ fun MetropolisUi(controller: MetropolisController,
         topBar = {
             TabRow(selectedTabIndex = selectedTab) {
                 Tab(selected = selectedTab == 0, onClick = { onTabSelected(0); trigger(MetropolisAction.SelectCity) }) {
-                    Text("Cities")
+                    Text(controller.cityController.state.title)
                 }
                 Tab(selected = selectedTab == 1, onClick = { onTabSelected(1); trigger(MetropolisAction.SelectCountry) }) {
-                    Text("Countries")
+                    Text(controller.countryController.state.title)
                 }
             }
         },

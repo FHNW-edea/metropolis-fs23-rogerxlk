@@ -60,11 +60,11 @@ class CityController(
                 id = city.id,
                 repository = crudRepository,
                 onSave = {
-                    crudRepository.update(city)
+//                    crudRepository.update(city)
                     switchToOverview()
                 },
                 onDelete = {
-                    crudRepository.delete(city.id)
+//                    crudRepository.delete(city.id)
                     switchToOverview()
                 },
                                    )
