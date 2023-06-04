@@ -1,5 +1,5 @@
 
 fun main() {
-    metropolis.cityexplorer.main()
-    metropolis.countryexplorer.main()
+    metropolis.city.cityexplorer.main()
+    metropolis.country.countryexplorer.main()
 }

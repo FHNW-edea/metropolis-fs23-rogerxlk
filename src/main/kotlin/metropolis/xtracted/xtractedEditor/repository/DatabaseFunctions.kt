@@ -13,7 +13,7 @@ import java.util.logging.Logger
 import kotlin.time.Duration
 
 fun <T> readFirst(url: String, table: String, columns: String = "*", where: String , map: ResultSet.() -> T?) : T? =
-    DriverManager.getConnection(url) //TODO: opening a connection is pretty expensive. Introduce a ConnectionPool that reuses connections.
+    DriverManager.getConnection(url) //opening a connection is pretty expensive. Introduce a ConnectionPool that reuses connections.
         .use {
             val logger: Logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME)
 
