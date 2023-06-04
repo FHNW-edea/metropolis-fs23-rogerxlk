@@ -16,31 +16,41 @@ import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 class CityController(
     val repository: LazyRepository<City>,
     val crudRepository: CrudRepository<City>,
-): ControllerBase<CityState, Action> (CityState(
+) : ControllerBase<CityState, Action>(
+    CityState(
         title = "City Demo",
         activeController = null,
         controllerType = ControllerType.CITY_EXPLORER
-                                               )) {
+    )
+) {
 
 
     private fun switchToEditor(city: City) {
-        state = state.copy(activeController = createEditorController(city),
-                           controllerType = ControllerType.CITY_EDITOR)
+        state = state.copy(
+            activeController = createEditorController(city),
+            controllerType = ControllerType.CITY_EDITOR
+        )
     }
 
     private fun switchToNewEntry() {
-        val newId = crudRepository.createKey("""
+        val newId = crudRepository.createKey(
+            """
             |       (${CityColumnEditor.NAME}, ${CityColumnEditor.LONGITUDE}, ${CityColumnEditor.LATITUDE}, ${CityColumnEditor.FEATURE_CLASS}, ${CityColumnEditor.FEATURE_CODE}, ${CityColumnEditor.COUNTRY_CODE}, ${CityColumnEditor.POPULATION}, ${CityColumnEditor.DEM}, ${CityColumnEditor.TIMEZONE}, ${CityColumnEditor.MODIFICATION_DATE}) 
-            |VALUES ('',                       0.0,                         0.0,                   '',                               '',                            '',                             0,                              0.0,                     '',             '${LocalDate.now()}')""".trimMargin())
+            |VALUES ('',                       0.0,                         0.0,                   '',                               '',                            '',                             0,                              0.0,                     '',             '${LocalDate.now()}')""".trimMargin()
+        )
 
 
-        state = state.copy(activeController = createEditorController(crudRepository.read(newId)!!),
-                           controllerType = ControllerType.CITY_EDITOR)
+        state = state.copy(
+            activeController = createEditorController(crudRepository.read(newId)!!),
+            controllerType = ControllerType.CITY_EDITOR
+        )
     }
 
     fun switchToOverview() {
-        state = state.copy(activeController = createExplorerController(),
-                           controllerType = ControllerType.CITY_EXPLORER)
+        state = state.copy(
+            activeController = createExplorerController(),
+            controllerType = ControllerType.CITY_EXPLORER
+        )
     }
 
     private fun createExplorerController() =
@@ -57,17 +67,15 @@ class CityController(
 
     private fun createEditorController(city: City): EditorController<City> {
         return cityEditorController(
-                id = city.id,
-                repository = crudRepository,
-                onSave = {
-//                    crudRepository.update(city)
-                    switchToOverview()
-                },
-                onDelete = {
-//                    crudRepository.delete(city.id)
-                    switchToOverview()
-                },
-                                   )
+            id = city.id,
+            repository = crudRepository,
+            onSave = {
+                switchToOverview()
+            },
+            onDelete = {
+                switchToOverview()
+            },
+        )
     }
 
     override fun executeAction(action: Action): CityState {
