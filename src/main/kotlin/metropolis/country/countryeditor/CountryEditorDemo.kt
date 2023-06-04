@@ -3,8 +3,8 @@ package metropolis.country.countryeditor
 import androidx.compose.ui.window.application
 import metropolis.country.countryeditor.controller.countryEditorController
 import metropolis.country.countryeditor.view.CountryEditorWindow
-import metropolis.sharedrepository.countryCrudRepository
-import metropolis.xtracted.xtractedEditor.repository.urlFromResources
+import metropolis.shared.repository.countryCrudRepository
+import metropolis.shared.xtracted.repository.urlFromResources
 
 fun main() {
     val url = "/data/metropolisDB".urlFromResources()

@@ -4,8 +4,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.country.countryexplorer.controller.countryExplorerController
 import metropolis.country.countryexplorer.view.CountryExplorerWindow
-import metropolis.sharedrepository.countryLazyRepository
-import metropolis.xtracted.xtractedEditor.repository.urlFromResources
+import metropolis.shared.repository.countryLazyRepository
+import metropolis.shared.xtracted.repository.urlFromResources
 import java.util.logging.Level
 import java.util.logging.LogManager
 import java.util.logging.Logger

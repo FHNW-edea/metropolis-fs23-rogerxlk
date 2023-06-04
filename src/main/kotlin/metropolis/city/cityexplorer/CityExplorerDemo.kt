@@ -4,8 +4,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.city.cityexplorer.controller.cityExplorerController
 import metropolis.city.cityexplorer.view.CityExplorerWindow
-import metropolis.sharedrepository.cityLazyRepository
-import metropolis.xtracted.xtractedEditor.repository.urlFromResources
+import metropolis.shared.xtracted.repository.urlFromResources
 import java.util.logging.Level
 import java.util.logging.LogManager
 import java.util.logging.Logger
@@ -15,7 +14,7 @@ fun main() {
 
     val url        = "/data/metropolisDB".urlFromResources()
     val cityExplorerController = cityExplorerController(
-        repository = cityLazyRepository(url),
+        repository = metropolis.shared.repository.cityLazyRepository(url),
         onCreate = {},
         onSelected = { }
     )

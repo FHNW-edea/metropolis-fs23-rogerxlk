@@ -15,7 +15,7 @@ import metropolis.city.cityCombined.view.CityUi
 import metropolis.country.countryCombined.controller.CountryController
 import metropolis.country.countryCombined.view.CountryUi
 import metropolis.metropolis.controller.MetropolisController
-import metropolis.shareddata.ControllerType
+import metropolis.shared.data.ControllerType
 
 @Composable
 fun ApplicationScope.MetropolisWindow(controller: MetropolisController) {
@@ -53,8 +53,8 @@ fun MetropolisUi(
         content = {
             val state = controller.state
             when (state.controllerType) {
-                ControllerType.CITY -> CityUi(controller.state.activeController as CityController)
-                ControllerType.COUNTRY -> CountryUi(controller.state.activeController as CountryController)
+                metropolis.shared.data.ControllerType.CITY -> CityUi(controller.state.activeController as CityController)
+                metropolis.shared.data.ControllerType.COUNTRY -> CountryUi(controller.state.activeController as CountryController)
                 else -> {}
             }
         }

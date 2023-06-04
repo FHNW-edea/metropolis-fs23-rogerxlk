@@ -2,14 +2,14 @@ package metropolis.country.countryCombined.controller
 
 import metropolis.country.countryeditor.controller.countryEditorController
 import metropolis.country.countryexplorer.controller.countryExplorerController
-import metropolis.shareddata.ControllerType
-import metropolis.shareddata.Country
-import metropolis.sharedrepository.CountryColumnEditor
-import metropolis.xtracted.xtractedEditor.controller.ControllerBase
-import metropolis.xtracted.xtractedEditor.controller.editor.EditorController
-import metropolis.xtracted.xtractedEditor.repository.CrudRepository
-import metropolis.xtracted.xtractedExplorer.controller.Action
-import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
+import metropolis.shared.data.ControllerType
+import metropolis.shared.data.Country
+import metropolis.shared.repository.CountryColumnEditor
+import metropolis.shared.xtracted.controller.Action
+import metropolis.shared.xtracted.controller.ControllerBase
+import metropolis.shared.xtracted.controller.editor.EditorController
+import metropolis.shared.xtracted.repository.editor.CrudRepository
+import metropolis.shared.xtracted.repository.explorer.LazyRepository
 
 class CountryController(
     val repository: LazyRepository<Country>,

@@ -2,14 +2,14 @@ package metropolis.city.cityexplorer.controller
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import metropolis.shareddata.City
-import metropolis.sharedrepository.CityColumnExplorer
-import metropolis.xtracted.xtractedEditor.model.format
-import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableController
-import metropolis.xtracted.xtractedExplorer.model.DoubleColumn
-import metropolis.xtracted.xtractedExplorer.model.IntColumn
-import metropolis.xtracted.xtractedExplorer.model.StringColumn
-import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
+import metropolis.shared.data.City
+import metropolis.shared.repository.CityColumnExplorer
+import metropolis.shared.xtracted.controller.explorer.LazyTableController
+import metropolis.shared.xtracted.model.editor.format
+import metropolis.shared.xtracted.model.explorer.DoubleColumn
+import metropolis.shared.xtracted.model.explorer.IntColumn
+import metropolis.shared.xtracted.model.explorer.StringColumn
+import metropolis.shared.xtracted.repository.explorer.LazyRepository
 import java.time.LocalDate
 
 private const val ELLIPSES = "..."
@@ -22,8 +22,9 @@ fun cityExplorerController(
         repository  = repository,
         onSelected  = onSelected,
         onCreate    = onCreate,
-        defaultItem = City( -999, ELLIPSES, ELLIPSES, ELLIPSES, 0.0, 0.0, ELLIPSES, ELLIPSES, ELLIPSES,
-            ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES,0,0,0, ELLIPSES,
+        defaultItem = City(
+            -999, ELLIPSES, ELLIPSES, ELLIPSES, 0.0, 0.0, ELLIPSES, ELLIPSES, ELLIPSES,
+            ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES, 0, 0, 0, ELLIPSES,
             LocalDate.now()
         ),
         columns     = listOf(

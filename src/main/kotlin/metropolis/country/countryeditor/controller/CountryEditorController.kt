@@ -1,11 +1,13 @@
 package metropolis.country.countryeditor.controller
 
-import metropolis.shareddata.Country
-import metropolis.xtracted.xtractedEditor.controller.editor.EditorController
-import metropolis.xtracted.xtractedEditor.controller.editor.get
-import metropolis.xtracted.xtractedEditor.model.*
+import metropolis.shared.data.Country
+import metropolis.shared.xtracted.controller.editor.EditorController
+import metropolis.shared.xtracted.model.Translatable
+import metropolis.shared.xtracted.model.editor.*
+import metropolis.shared.xtracted.controller.editor.get
+import metropolis.shared.xtracted.repository.editor.CrudRepository
+
 import java.util.*
-import metropolis.xtracted.xtractedEditor.repository.CrudRepository
 
 val ch = Locale("de", "CH")
 fun countryEditorController(
@@ -14,23 +16,23 @@ fun countryEditorController(
     onSave: () -> Unit,
     onDelete: () -> Unit
 ) = EditorController(
-        id = id,
-        title = Message.TITLE,
-        locale = ch,
-        onSave = onSave,
-        onDelete = onDelete,
-        repository = repository,
-        asData = { attributes ->
-            Country(
-                id = id,
-                isoAlpha2 = attributes[Id.ISO_ALPHA2],
-                isoAlpha3 = attributes[Id.ISO_ALPHA3],
+    id = id,
+    title = Message.TITLE,
+    locale = ch,
+    onSave = onSave,
+    onDelete = onDelete,
+    repository = repository,
+    asData = { attributes ->
+        Country(
+            id = id,
+            isoAlpha2 = attributes[Id.ISO_ALPHA2],
+            isoAlpha3 = attributes[Id.ISO_ALPHA3],
 //                fipsCode = attributes[Id.FIPS_CODE],
-                name = attributes[Id.NAME],
-                capital = attributes[Id.CAPITAL],
-                areaInSqKm = attributes[Id.AREA_IN_SQ_KM],
-                population = attributes[Id.POPULATION],
-                continent = attributes[Id.CONTINENT],
+            name = attributes[Id.NAME],
+            capital = attributes[Id.CAPITAL],
+            areaInSqKm = attributes[Id.AREA_IN_SQ_KM],
+            population = attributes[Id.POPULATION],
+            continent = attributes[Id.CONTINENT],
 //                tld = attributes[Id.TLD],
 //                currencyCode = attributes[Id.CURRENCY_CODE],
 //                currencyName = attributes[Id.CURRENCY_NAME],
@@ -38,45 +40,51 @@ fun countryEditorController(
 //                postalCodeFormat = attributes[Id.POSTAL_CODE_FORMAT],
 //                postalCodeRegex = attributes[Id.POSTAL_CODE_REGEX],
 //                languages = attributes[Id.LANGUAGES],
-                geonameId = attributes[Id.GEONAME_ID],
+            geonameId = attributes[Id.GEONAME_ID],
 //                neighbours = attributes[Id.NEIGHBOURS],
 //                equivalentFipsCode = attributes[Id.EQUIVALENT_FIPS_CODE]
-            )
-        },
-        asAttributeList = { country ->
-            listOf(
-                (stringAttribute(id = Id.NAME,
-                    value = country.name,
-                    required = true,
-                    syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
-                (stringAttribute(id = Id.CAPITAL,
-                    value = country.capital,
-                    required = true,
-                    syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
-                (stringAttribute(id = Id.CONTINENT,
-                    value = country.continent,
-                    required = true,
-                    syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
-                (integerAttribute(id = Id.POPULATION,
-                    value = country.population,
-                    required = true)),
-                doubleAttribute(id = Id.AREA_IN_SQ_KM,
-                    value = country.areaInSqKm,
-                    required = true),
-                (stringAttribute(id = Id.ISO_ALPHA2,
-                    value = country.isoAlpha2,
-                    required = true,
-                    syntaxValidator = { (it.length == 2).asValidationResult(Message.TOO_HIGH) })),
-                (stringAttribute(id = Id.ISO_ALPHA3,
-                    value = country.isoAlpha3,
-                    required = true,
-                    syntaxValidator = { (it.length == 3).asValidationResult(Message.TOO_HIGH) })),
-                (longAttribute(id = Id.GEONAME_ID,
-                    value = country.geonameId,
-                    required = true))
-            )
-        }
-    )
+        )
+    },
+    asAttributeList = { country ->
+        listOf(
+            (stringAttribute(id = Id.NAME,
+                value = country.name,
+                required = true,
+                syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+            (stringAttribute(id = Id.CAPITAL,
+                value = country.capital,
+                required = true,
+                syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+            (stringAttribute(id = Id.CONTINENT,
+                value = country.continent,
+                required = true,
+                syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+            (integerAttribute(
+                id = Id.POPULATION,
+                value = country.population,
+                required = true
+            )),
+            doubleAttribute(
+                id = Id.AREA_IN_SQ_KM,
+                value = country.areaInSqKm,
+                required = true
+            ),
+            (stringAttribute(id = Id.ISO_ALPHA2,
+                value = country.isoAlpha2,
+                required = true,
+                syntaxValidator = { (it.length == 2).asValidationResult(Message.TOO_HIGH) })),
+            (stringAttribute(id = Id.ISO_ALPHA3,
+                value = country.isoAlpha3,
+                required = true,
+                syntaxValidator = { (it.length == 3).asValidationResult(Message.TOO_HIGH) })),
+            (longAttribute(
+                id = Id.GEONAME_ID,
+                value = country.geonameId,
+                required = true
+            ))
+        )
+    }
+)
 
 
 enum class Id(override val german: String, override val english: String) : AttributeId {

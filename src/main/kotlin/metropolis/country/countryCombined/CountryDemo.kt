@@ -4,9 +4,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.window.application
 import metropolis.country.countryCombined.controller.CountryController
 import metropolis.country.countryCombined.view.CountryWindow
-import metropolis.sharedrepository.countryCrudRepository
-import metropolis.sharedrepository.countryLazyRepository
-import metropolis.xtracted.xtractedEditor.repository.urlFromResources
+import metropolis.shared.repository.countryCrudRepository
+import metropolis.shared.repository.countryLazyRepository
+import metropolis.shared.xtracted.repository.urlFromResources
 
 fun main() {
     val url = "/data/metropolisDB".urlFromResources()

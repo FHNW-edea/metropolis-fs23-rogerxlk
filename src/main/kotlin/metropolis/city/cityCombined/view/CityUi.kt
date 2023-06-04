@@ -10,10 +10,9 @@ import androidx.compose.ui.window.rememberWindowState
 import metropolis.city.cityCombined.controller.CityController
 import metropolis.city.cityeditor.view.CityEditorUi
 import metropolis.city.cityexplorer.view.CityExplorerUI
-import metropolis.shareddata.City
-import metropolis.shareddata.ControllerType
-import metropolis.xtracted.xtractedEditor.controller.editor.EditorController
-import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableController
+import metropolis.shared.data.City
+import metropolis.shared.xtracted.controller.editor.EditorController
+import metropolis.shared.xtracted.controller.explorer.LazyTableController
 
 @Composable
 fun ApplicationScope.CityWindow(controller: CityController) {
@@ -32,8 +31,8 @@ fun ApplicationScope.CityWindow(controller: CityController) {
 fun CityUi(controller: CityController) {
     val state = controller.state
     when (state.controllerType) {
-        ControllerType.CITY_EXPLORER -> showExplorerUi(state.activeController as LazyTableController<City>)
-        ControllerType.CITY_EDITOR -> showEditorUi(state.activeController as EditorController<City>)
+        metropolis.shared.data.ControllerType.CITY_EXPLORER -> showExplorerUi(state.activeController as LazyTableController<City>)
+        metropolis.shared.data.ControllerType.CITY_EDITOR -> showEditorUi(state.activeController as EditorController<City>)
         else -> {}
     }
 }

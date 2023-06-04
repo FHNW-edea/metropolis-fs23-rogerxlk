@@ -3,12 +3,11 @@ package metropolis.city.cityeditor
 import androidx.compose.ui.window.application
 import metropolis.city.cityeditor.controller.cityEditorController
 import metropolis.city.cityeditor.view.CityEditorWindow
-import metropolis.sharedrepository.cityCrudRepository
-import metropolis.xtracted.xtractedEditor.repository.urlFromResources
+import metropolis.shared.xtracted.repository.urlFromResources
 
 fun main() {
     val url = "/data/metropolisDB".urlFromResources()
-    val repository = cityCrudRepository(url)
+    val repository = metropolis.shared.repository.cityCrudRepository(url)
     val cityId = 782270
 
     val controller = cityEditorController(cityId, repository, onSave = { println("saved") }, onDelete = { println("deleted") })

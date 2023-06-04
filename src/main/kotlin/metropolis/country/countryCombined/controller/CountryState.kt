@@ -1,7 +1,7 @@
 package metropolis.country.countryCombined.controller
 
-import metropolis.shareddata.ControllerType
-import metropolis.xtracted.xtractedEditor.controller.ControllerBase
+import metropolis.shared.data.ControllerType
+import metropolis.shared.xtracted.controller.ControllerBase
 
 data class CountryState (
     val title: String,

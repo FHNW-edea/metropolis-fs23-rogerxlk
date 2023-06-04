@@ -4,14 +4,14 @@ package metropolis.city.cityCombined.controller
 import java.time.LocalDate
 import metropolis.city.cityeditor.controller.cityEditorController
 import metropolis.city.cityexplorer.controller.cityExplorerController
-import metropolis.shareddata.City
-import metropolis.shareddata.ControllerType
-import metropolis.sharedrepository.CityColumnEditor
-import metropolis.xtracted.xtractedEditor.controller.ControllerBase
-import metropolis.xtracted.xtractedEditor.controller.editor.EditorController
-import metropolis.xtracted.xtractedEditor.repository.CrudRepository
-import metropolis.xtracted.xtractedExplorer.controller.Action
-import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
+import metropolis.shared.data.City
+import metropolis.shared.data.ControllerType
+import metropolis.shared.repository.CityColumnEditor
+import metropolis.shared.xtracted.controller.Action
+import metropolis.shared.xtracted.controller.ControllerBase
+import metropolis.shared.xtracted.controller.editor.EditorController
+import metropolis.shared.xtracted.repository.editor.CrudRepository
+import metropolis.shared.xtracted.repository.explorer.LazyRepository
 
 class CityController(
     val repository: LazyRepository<City>,

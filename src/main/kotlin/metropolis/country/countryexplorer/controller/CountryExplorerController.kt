@@ -2,14 +2,14 @@ package metropolis.country.countryexplorer.controller
 
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import metropolis.shareddata.Country
-import metropolis.sharedrepository.CountryColumnExplorer
-import metropolis.xtracted.xtractedEditor.model.format
-import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableController
-import metropolis.xtracted.xtractedExplorer.model.DoubleColumn
-import metropolis.xtracted.xtractedExplorer.model.IntColumn
-import metropolis.xtracted.xtractedExplorer.model.StringColumn
-import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
+import metropolis.shared.data.Country
+import metropolis.shared.repository.CountryColumnExplorer
+import metropolis.shared.xtracted.controller.explorer.LazyTableController
+import metropolis.shared.xtracted.model.editor.format
+import metropolis.shared.xtracted.model.explorer.DoubleColumn
+import metropolis.shared.xtracted.model.explorer.IntColumn
+import metropolis.shared.xtracted.model.explorer.StringColumn
+import metropolis.shared.xtracted.repository.explorer.LazyRepository
 
 private const val ELLIPSES = "..."
 
@@ -21,12 +21,13 @@ fun countryExplorerController(
         repository  = repository,
         onSelected  = onSelected,
         onCreate    = onCreate,
-        defaultItem = Country( -999, ELLIPSES,
+        defaultItem = Country(
+            -999, ELLIPSES,
             ELLIPSES,
             ELLIPSES, ELLIPSES, null, 0.0, 0, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES, ELLIPSES,
             ELLIPSES,
             ELLIPSES,
-            ELLIPSES,0,
+            ELLIPSES, 0,
             ELLIPSES,
             ELLIPSES
         ),

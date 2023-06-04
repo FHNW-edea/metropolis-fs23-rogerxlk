@@ -6,11 +6,9 @@ import metropolis.city.cityCombined.controller.CityController
 import metropolis.country.countryCombined.controller.CountryController
 import metropolis.metropolis.controller.MetropolisController
 import metropolis.metropolis.view.MetropolisWindow
-import metropolis.sharedrepository.cityCrudRepository
-import metropolis.sharedrepository.cityLazyRepository
-import metropolis.sharedrepository.countryCrudRepository
-import metropolis.sharedrepository.countryLazyRepository
-import metropolis.xtracted.xtractedEditor.repository.urlFromResources
+import metropolis.shared.repository.countryCrudRepository
+import metropolis.shared.repository.countryLazyRepository
+import metropolis.shared.xtracted.repository.urlFromResources
 import java.util.logging.Level
 import java.util.logging.LogManager
 import java.util.logging.Logger
@@ -21,8 +19,8 @@ fun main() {
 
     try {
         val url = "/data/metropolisDB".urlFromResources()
-        val cityExplorerRepository = cityLazyRepository(url)
-        val cityEditorRepository = cityCrudRepository(url)
+        val cityExplorerRepository = metropolis.shared.repository.cityLazyRepository(url)
+        val cityEditorRepository = metropolis.shared.repository.cityCrudRepository(url)
         val countryExplorerRepository = countryLazyRepository(url)
         val countryEditorRepository = countryCrudRepository(url)
 

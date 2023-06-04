@@ -2,8 +2,8 @@ package metropolis.metropolis.controller
 
 import metropolis.city.cityCombined.controller.CityController
 import metropolis.country.countryCombined.controller.CountryController
-import metropolis.shareddata.ControllerType
-import metropolis.xtracted.xtractedEditor.controller.ControllerBase
+import metropolis.shared.data.ControllerType
+import metropolis.shared.xtracted.controller.ControllerBase
 
 class MetropolisController(
     val cityController: CityController,

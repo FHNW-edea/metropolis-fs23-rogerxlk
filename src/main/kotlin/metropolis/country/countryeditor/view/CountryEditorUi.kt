@@ -20,17 +20,18 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.country.countryeditor.controller.Id
-import metropolis.shareddata.Country
-import metropolis.xtracted.xtractedEditor.model.Attribute
-import metropolis.xtracted.xtractedEditor.model.EditorState
-import metropolis.xtracted.xtractedEditor.model.UndoState
-import metropolis.xtracted.xtractedEditor.model.get
-import metropolis.xtracted.xtractedEditor.view.VSpace
-import metropolis.xtracted.xtractedEditor.view.editor.EditorBar
-import metropolis.xtracted.xtractedEditor.view.editor.Form
+import metropolis.shared.data.Country
+import metropolis.shared.xtracted.controller.editor.EditorAction
+import metropolis.shared.xtracted.model.editor.Attribute
+import metropolis.shared.xtracted.model.editor.EditorState
+import metropolis.shared.xtracted.model.editor.get
+import metropolis.shared.xtracted.model.undo.UndoState
+import metropolis.shared.xtracted.view.editor.EditorBar
+import metropolis.shared.xtracted.view.editor.Form
+import metropolis.shared.xtracted.view.editor.VSpace
 
 @Composable
-fun ApplicationScope.CountryEditorWindow(state: EditorState<Country>, undoState: UndoState, trigger : (metropolis.xtracted.xtractedEditor.controller.editor.EditorAction) -> Unit) {
+fun ApplicationScope.CountryEditorWindow(state: EditorState<Country>, undoState: UndoState, trigger : (EditorAction) -> Unit) {
 
     Window(title          = state.title.translate(state.locale),
            onCloseRequest = ::exitApplication,
@@ -43,7 +44,7 @@ fun ApplicationScope.CountryEditorWindow(state: EditorState<Country>, undoState:
 }
 
 @Composable
-fun CountryEditorUi(state: EditorState<Country>, undoState: UndoState, trigger : (metropolis.xtracted.xtractedEditor.controller.editor.EditorAction) -> Unit) {
+fun CountryEditorUi(state: EditorState<Country>, undoState: UndoState, trigger : (EditorAction) -> Unit) {
     Column{
         EditorBar(state, undoState, trigger)
 
@@ -60,7 +61,7 @@ fun CountryEditorUi(state: EditorState<Country>, undoState: UndoState, trigger :
 
 
 @Composable
-private fun Header(state: EditorState<Country>) {
+private fun Header(state: EditorState<metropolis.shared.data.Country>) {
     // im Editor-State werden die Attribute verwaltet. Diese können generisch als Formular angezeigt werden
     // der Header ist jedoch speziell, nicht generisch (oder noch nicht)
     val name    : Attribute<String> = state[Id.NAME]

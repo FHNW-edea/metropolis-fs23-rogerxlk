@@ -13,13 +13,13 @@ import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
-import metropolis.shareddata.Country
-import metropolis.xtracted.xtractedExplorer.controller.lazyloading.LazyTableAction
-import metropolis.xtracted.xtractedExplorer.model.TableState
-import metropolis.xtracted.xtractedExplorer.view.ActionIconStrip
-import metropolis.xtracted.xtractedExplorer.view.AlignLeftRight
-import metropolis.xtracted.xtractedExplorer.view.Table
-import metropolis.xtracted.xtractedExplorer.view.Toolbar
+import metropolis.shared.data.Country
+import metropolis.shared.xtracted.controller.explorer.LazyTableAction
+import metropolis.shared.xtracted.model.explorer.TableState
+import metropolis.shared.xtracted.view.ActionIconStrip
+import metropolis.shared.xtracted.view.explorer.AlignLeftRight
+import metropolis.shared.xtracted.view.explorer.Table
+import metropolis.shared.xtracted.view.explorer.Toolbar
 
 @Composable
 fun ApplicationScope.CountryExplorerWindow(
@@ -59,7 +59,7 @@ fun CountryExplorerUI(
                     trigger = trigger,
                     listOf(
                         LazyTableAction.AddItem(
-                            Country(
+                            metropolis.shared.data.Country(
                                 -999,
                                 name = "New",
                                 continent = "New",

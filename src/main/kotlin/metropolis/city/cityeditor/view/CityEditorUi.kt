@@ -20,15 +20,15 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import metropolis.city.cityeditor.controller.Id
-import metropolis.shareddata.City
-import metropolis.xtracted.xtractedEditor.controller.editor.EditorAction
-import metropolis.xtracted.xtractedEditor.model.Attribute
-import metropolis.xtracted.xtractedEditor.model.EditorState
-import metropolis.xtracted.xtractedEditor.model.UndoState
-import metropolis.xtracted.xtractedEditor.model.get
-import metropolis.xtracted.xtractedEditor.view.VSpace
-import metropolis.xtracted.xtractedEditor.view.editor.EditorBar
-import metropolis.xtracted.xtractedEditor.view.editor.Form
+import metropolis.shared.data.City
+import metropolis.shared.xtracted.controller.editor.EditorAction
+import metropolis.shared.xtracted.model.editor.Attribute
+import metropolis.shared.xtracted.model.editor.EditorState
+import metropolis.shared.xtracted.model.editor.get
+import metropolis.shared.xtracted.model.undo.UndoState
+import metropolis.shared.xtracted.view.editor.EditorBar
+import metropolis.shared.xtracted.view.editor.Form
+import metropolis.shared.xtracted.view.editor.VSpace
 
 
 @Composable

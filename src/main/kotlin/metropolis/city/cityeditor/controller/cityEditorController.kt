@@ -1,11 +1,12 @@
 package metropolis.city.cityeditor.controller
 
-import metropolis.shareddata.City
-import metropolis.xtracted.xtractedEditor.controller.editor.EditorController
+import metropolis.shared.data.City
+import metropolis.shared.xtracted.controller.editor.EditorController
+import metropolis.shared.xtracted.model.Translatable
+import metropolis.shared.xtracted.model.editor.*
+import metropolis.shared.xtracted.controller.editor.get
+import metropolis.shared.xtracted.repository.editor.CrudRepository
 import java.util.*
-import metropolis.xtracted.xtractedEditor.controller.editor.get
-import metropolis.xtracted.xtractedEditor.model.*
-import metropolis.xtracted.xtractedEditor.repository.CrudRepository
 
 val ch = Locale("de", "CH")
 fun cityEditorController(
@@ -14,62 +15,68 @@ fun cityEditorController(
     onSave: () -> Unit,
     onDelete: () -> Unit
 ) = EditorController(
-        id = id,
-        title = Message.TITLE,
-        locale = ch,
-        onSave = onSave,
-        onDelete = onDelete,
-        repository = repository,
-        // diese Attribute von City werden in der DB abgespeichert, dazu muss eine Instanz von City aus den Attributen erzeugt werden
-        // die abzuspeichernden Werte muss mit der Attribut-Liste übereinstimmen
-        asData = { attributes ->
-            City(
-                id = id,
-                name = attributes[Id.NAME],
-                asciiName = attributes[Id.ASCII_NAME],
+    id = id,
+    title = Message.TITLE,
+    locale = ch,
+    onSave = onSave,
+    onDelete = onDelete,
+    repository = repository,
+    // diese Attribute von City werden in der DB abgespeichert, dazu muss eine Instanz von City aus den Attributen erzeugt werden
+    // die abzuspeichernden Werte muss mit der Attribut-Liste übereinstimmen
+    asData = { attributes ->
+        City(
+            id = id,
+            name = attributes[Id.NAME],
+            asciiName = attributes[Id.ASCII_NAME],
 //                alternateNames = attributes[Id.ALTERNATE_NAMES],
-                latitude = attributes[Id.LATITUDE],
-                longitude = attributes[Id.LONGITUDE],
+            latitude = attributes[Id.LATITUDE],
+            longitude = attributes[Id.LONGITUDE],
 //                featureClass = attributes[Id.FEATURE_CLASS],
 //                featureCode = attributes[Id.FEATURE_CODE],
-                countryCode = attributes[Id.COUNTRY_CODE],
+            countryCode = attributes[Id.COUNTRY_CODE],
 //                cc2 = attributes[Id.CC2],
 //                admin1Code = attributes[Id.ADMIN1_CODE],
 //                admin2Code = attributes[Id.ADMIN2_CODE],
 //                admin3Code = attributes[Id.ADMIN3_CODE],
 //                admin4Code = attributes[Id.ADMIN4_CODE],
-                population = attributes[Id.POPULATION],
+            population = attributes[Id.POPULATION],
 //                elevation = attributes[Id.ELEVATION],
-            )
-        },
-        // diese Instanz von Mountain wurde aus der DB gelesen
-        // für alle Properties von Mountain, die im Editor erscheinen sollen, ein Attribute erzeugen
-        asAttributeList = { city ->
-            listOf(
-                (stringAttribute(id = Id.NAME,
-                    value = city.name,
-                    required = true,
-                    syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
-                (stringAttribute(id = Id.ASCII_NAME,
-                    value = city.asciiName,
-                    required = true,
-                    syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
-                (doubleAttribute(id = Id.LATITUDE,
-                    value = city.latitude,
-                    required = true)),
-                (doubleAttribute(id = Id.LONGITUDE,
-                    value = city.longitude,
-                    required = true)),
-                (stringAttribute(id = Id.COUNTRY_CODE,
-                    value = city.countryCode,
-                    required = true,
-                    syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
-                (integerAttribute(id = Id.POPULATION,
-                    value = city.population,
-                    required = true)),
-            )
-        }
-    )
+        )
+    },
+    // diese Instanz von Mountain wurde aus der DB gelesen
+    // für alle Properties von Mountain, die im Editor erscheinen sollen, ein Attribute erzeugen
+    asAttributeList = { city ->
+        listOf(
+            (stringAttribute(id = Id.NAME,
+                value = city.name,
+                required = true,
+                syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+            (stringAttribute(id = Id.ASCII_NAME,
+                value = city.asciiName,
+                required = true,
+                syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+            (doubleAttribute(
+                id = Id.LATITUDE,
+                value = city.latitude,
+                required = true
+            )),
+            (doubleAttribute(
+                id = Id.LONGITUDE,
+                value = city.longitude,
+                required = true
+            )),
+            (stringAttribute(id = Id.COUNTRY_CODE,
+                value = city.countryCode,
+                required = true,
+                syntaxValidator = { (it.length <= 15).asValidationResult(Message.NAME_TOO_LONG) })),
+            (integerAttribute(
+                id = Id.POPULATION,
+                value = city.population,
+                required = true
+            )),
+        )
+    }
+)
 
 
 enum class Id(override val german: String, override val english: String) : AttributeId {
