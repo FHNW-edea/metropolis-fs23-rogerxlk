@@ -11,7 +11,7 @@ import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 enum class CountryColumnEditor : DbColumnEditor {
     ISO_ALPHA2,
     ISO_ALPHA3,
-    ISO_NUMERIC,
+    ID,
     FIPS_CODE,
     NAME,
     CAPITAL,
@@ -33,7 +33,7 @@ enum class CountryColumnEditor : DbColumnEditor {
 fun countryCrudRepository(url: String) =
     CrudRepository(url         = url,
         table       = "COUNTRY",
-        idColumn    = CountryColumnEditor.ISO_NUMERIC,
+        idColumn    = CountryColumnEditor.ID,
         dataColumns = mapOf(
             CountryColumnEditor.ISO_ALPHA2 to { it.isoAlpha2.asSql() },
             CountryColumnEditor.ISO_ALPHA3 to { it.isoAlpha3.asSql() },
@@ -57,7 +57,7 @@ fun countryCrudRepository(url: String) =
 
         mapper      = { Country(isoAlpha2           = getString("${CountryColumnEditor.ISO_ALPHA2}"),
             isoAlpha3           = getString("${CountryColumnEditor.ISO_ALPHA3}"),
-            isoNumeric          = getInt   ("${CountryColumnEditor.ISO_NUMERIC}"),
+            id                  = getInt   ("${CountryColumnEditor.ID}"),
             fipsCode            = getString("${CountryColumnEditor.FIPS_CODE}"),
             name                = getString("${CountryColumnEditor.NAME}"),
             capital             = getString("${CountryColumnEditor.CAPITAL}"),
@@ -80,7 +80,7 @@ fun countryCrudRepository(url: String) =
 enum class CountryColumnExplorer : DbColumnExplorer {
     ISO_ALPHA2,
     ISO_ALPHA3,
-    ISO_NUMERIC,
+    ID,
     FIPS_CODE,
     NAME,
     CAPITAL,
@@ -106,7 +106,7 @@ fun countryLazyRepository(url: String) =
         dataColumns = listOf(
             CountryColumnExplorer.ISO_ALPHA2,
             CountryColumnExplorer.ISO_ALPHA3,
-            CountryColumnExplorer.ISO_NUMERIC,
+            CountryColumnExplorer.ID,
             CountryColumnExplorer.FIPS_CODE,
             CountryColumnExplorer.NAME,
             CountryColumnExplorer.CAPITAL,
@@ -124,12 +124,12 @@ fun countryLazyRepository(url: String) =
             CountryColumnExplorer.NEIGHBOURS,
             CountryColumnExplorer.EQUIVALENT_FIPS_CODE
         ),
-        idColumn = CountryColumnExplorer.ISO_NUMERIC,
+        idColumn = CountryColumnExplorer.ID,
         mapper = {
             Country(
                 isoAlpha2 = getString(CountryColumnExplorer.ISO_ALPHA2.name),
                 isoAlpha3 = getString(CountryColumnExplorer.ISO_ALPHA3.name),
-                isoNumeric = getInt(CountryColumnExplorer.ISO_NUMERIC.name),
+                id = getInt(CountryColumnExplorer.ID.name),
                 fipsCode = getString(CountryColumnExplorer.FIPS_CODE.name),
                 name = getString(CountryColumnExplorer.NAME.name),
                 capital = getString(CountryColumnExplorer.CAPITAL.name),
@@ -155,7 +155,7 @@ fun countryLazyRepository(url: String) =
 CREATE TABLE COUNTRY (
                          ISO_ALPHA2           CHAR(2)          NOT NULL,
                          ISO_ALPHA3           CHAR(3)          NOT NULL,
-                         ISO_NUMERIC          INTEGER          PRIMARY KEY AUTOINCREMENT,
+                         ID          INTEGER          PRIMARY KEY AUTOINCREMENT,
                          FIPS_CODE            VARCHAR(3),
                          NAME                 VARCHAR(200)     NOT NULL,
                          CAPITAL              VARCHAR(200),

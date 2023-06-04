@@ -14,31 +14,41 @@ import metropolis.xtracted.xtractedExplorer.repository.LazyRepository
 class CountryController(
     val repository: LazyRepository<Country>,
     val crudRepository: CrudRepository<Country>,
-): ControllerBase<CountryState, Action>(CountryState(
-    title = "Country Demo",
-    activeController = null,
-    controllerType = ControllerType.COUNTRY_EXPLORER
-)) {
+) : ControllerBase<CountryState, Action>(
+    CountryState(
+        title = "Country Demo",
+        activeController = null,
+        controllerType = ControllerType.COUNTRY_EXPLORER
+    )
+) {
 
 
     private fun switchToEditor(country: Country) {
-        state = state.copy(activeController = createEditorController(country),
-            controllerType = ControllerType.COUNTRY_EDITOR)
+        state = state.copy(
+            activeController = createEditorController(country),
+            controllerType = ControllerType.COUNTRY_EDITOR
+        )
     }
 
     private fun switchToNewEntry() {
-        val newId = crudRepository.createKey("""
-            |       (${CountryColumnEditor.NAME}, ${CountryColumnEditor.ISO_ALPHA2}, ${CountryColumnEditor.ISO_ALPHA3}, ${CountryColumnEditor.AREA_IN_SQKM}, ${CountryColumnEditor.POPULATION}, ${CountryColumnEditor.CONTINENT}, ${CountryColumnEditor.GEONAME_ID}) 
-            |VALUES ('',                       '',                         '',                   '',                               0.0,                            0,                             '',                              0,                     )""".trimMargin())
+        val newId = crudRepository.createKey(
+            """
+    |(${CountryColumnEditor.NAME}, ${CountryColumnEditor.ISO_ALPHA2}, ${CountryColumnEditor.ISO_ALPHA3}, ${CountryColumnEditor.AREA_IN_SQKM}, ${CountryColumnEditor.POPULATION}, ${CountryColumnEditor.CONTINENT}, ${CountryColumnEditor.GEONAME_ID}) 
+    |VALUES ('', '', '', 0.0, 0, '', '')""".trimMargin()
+        )
 
 
-        state = state.copy(activeController = createEditorController(crudRepository.read(newId)!!),
-            controllerType = ControllerType.COUNTRY_EDITOR)
+        state = state.copy(
+            activeController = createEditorController(crudRepository.read(newId)!!),
+            controllerType = ControllerType.COUNTRY_EDITOR
+        )
     }
 
     fun switchToOverview() {
-        state = state.copy(activeController = createExplorerController(),
-            controllerType = ControllerType.COUNTRY_EXPLORER)
+        state = state.copy(
+            activeController = createExplorerController(),
+            controllerType = ControllerType.COUNTRY_EXPLORER
+        )
     }
 
     private fun createExplorerController() =
@@ -58,11 +68,9 @@ class CountryController(
             id = country.id,
             repository = crudRepository,
             onSave = {
-                crudRepository.update(country)
                 switchToOverview()
             },
             onDelete = {
-                crudRepository.delete(country.id)
                 switchToOverview()
             },
         )

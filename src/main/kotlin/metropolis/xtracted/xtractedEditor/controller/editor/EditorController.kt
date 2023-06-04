@@ -61,7 +61,7 @@ class EditorController<D: Identifiable>(val id              : Int,              
     }
 
     private fun save() : EditorState<D> {
-        onSave() //todo?
+        onSave()
         repository.update(asData(state.attributes))
         val updatedAttributes = buildList {
             for(attribute in state.attributes){

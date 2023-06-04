@@ -100,6 +100,31 @@ fun doubleAttribute(id               : AttributeId,
             dependentAttributes = dependentAttributes
         )
 
+fun longAttribute(id               : AttributeId,
+                  value            : Long?,
+                  validationRegex  : Regex                                                                 = intCHRegex,
+                  semanticValidator: (Long?) -> ValidationResult = { ValidationResult(true, null) },
+                  unit             : String                                                                = "",
+                  required         : Boolean                                                               = false,
+                  readOnly         : Boolean                                                               = false,
+                  dependentAttributes: Map<AttributeId, (Attribute<Long>, Attribute<*>) -> Attribute<*>> = emptyMap())  =
+    Attribute(id                  = id,
+        value               = value,
+        persistedValue      = value,
+        valueAsText         = value.format(nullFormat = ""),
+        formatter           = { value, userInput -> value.format(nullFormat = "") },
+        converter           = { it.asLong() },
+        unit                = unit,
+        required            = required,
+        readOnly            = readOnly,
+        syntaxValidator     = { it.matches(validationRegex).asValidationResult(ErrorMessage.NOT_A_INT) },
+        semanticValidator   = semanticValidator,
+        validationResult    = ValidationResult(true, null),
+        span                = 1,
+        dependentAttributes = dependentAttributes
+    )
+
+
 
 
 interface AttributeId : Translatable
@@ -120,6 +145,8 @@ val dateRegex      = Regex(pattern = """^[0123]\d[.][[01]\d.](19|20)(\d){2}$""")
 
 private fun String.asDouble() = trim().replace("$chGroupingSeparator", "").toDoubleOrNull()
 private fun String.asInt() = trim().replace("$chGroupingSeparator", "").toIntOrNull()
+private fun String.asLong() = trim().replace("$chGroupingSeparator", "").toLongOrNull()
+
 
 fun Boolean.asValidationResult(errorMessage: Translatable) =
     if(this) ValidationResult(true, null) else ValidationResult(false, errorMessage)
@@ -150,6 +177,14 @@ fun Int?.format(nullFormat: String = "?", locale: Locale = CH) : String =
         nullFormat
     } else {
         "%,d".format(locale, this)
+    }
+
+fun Long?.format(nullFormat: String = "?", locale: Locale = CH) : String =
+    if (null == this) {
+        nullFormat
+    } else {
+        val pattern = "%,d"
+        pattern.format(locale, this)
     }
 
 
