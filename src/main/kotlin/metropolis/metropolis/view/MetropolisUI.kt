@@ -1,10 +1,15 @@
 package metropolis.metropolis.view
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
 import androidx.compose.ui.window.Window
@@ -39,11 +44,15 @@ fun MetropolisUi(
     val (selectedTab, onTabSelected) = remember { mutableStateOf(0) }
     Scaffold(
         topBar = {
-            TabRow(selectedTabIndex = selectedTab) {
-                Tab(selected = selectedTab == 0, onClick = { onTabSelected(0); controller.switchToCityTable() }) {
+            TabRow(backgroundColor = Color(0xFFD1C4E9),
+                contentColor = MaterialTheme.colors.primary,
+                selectedTabIndex = selectedTab) {
+                Tab(modifier = Modifier.padding(vertical = 10.dp),
+                    selected = selectedTab == 0,
+                    onClick = { onTabSelected(0); controller.switchToCityTable() }) {
                     Text(controller.cityController.state.title)
                 }
-                Tab(
+                Tab(modifier = Modifier.padding(vertical = 10.dp),
                     selected = selectedTab == 1,
                     onClick = { onTabSelected(1); controller.switchToCountryTable() }) {
                     Text(controller.countryController.state.title)
@@ -53,8 +62,8 @@ fun MetropolisUi(
         content = {
             val state = controller.state
             when (state.controllerType) {
-                metropolis.shared.data.ControllerType.CITY -> CityUi(controller.state.activeController as CityController)
-                metropolis.shared.data.ControllerType.COUNTRY -> CountryUi(controller.state.activeController as CountryController)
+                ControllerType.CITY -> CityUi(controller.state.activeController as CityController)
+                ControllerType.COUNTRY -> CountryUi(controller.state.activeController as CountryController)
                 else -> {}
             }
         }
